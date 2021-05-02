@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/service/dashboard.service';
+
 @Component({
   selector: 'app-states',
   templateUrl: './states.component.html',
@@ -16,7 +17,6 @@ export class StatesComponent implements OnInit {
   IndiaTotalVaccinated: any = 0;
   IndiaTotalOther: any = 0;
   IndiaLastUpdate: any;
-  IndiaLastUpdateDate: any;
   IndiaLastUpdateTime: any;
   News: any;
 
@@ -28,27 +28,77 @@ export class StatesComponent implements OnInit {
     this.getIndiaData();
     this.getNews();
   }
+
+
   ngOnDestroy() {
     this.nav.routelinkr = 2;
     console.log(this.nav.routelinkr)
   }
 
+
+  timestampConvert(timestamp) {
+    let unix_timestamp = timestamp
+    var date = new Date(unix_timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var tdate= this.monthfinder(date.getMonth()) + " " + date.getDate()
+    var formattedTime =tdate +' , ' +  hours + ':' + minutes.substr(-2);
+    return(formattedTime);
+  }
+
+
+  monthfinder(mnth){
+    if(mnth==0){
+      return("January")
+    }
+    else if(mnth==1){
+      return("February")
+    }
+    else if(mnth==2){
+      return("March")
+    }
+    else if(mnth==3){
+      return("April")
+    }
+    else if(mnth==4){
+      return("May")
+    }
+    else if(mnth==5){
+      return("June")
+    }
+    else if(mnth==6){
+      return("July")
+    }
+    else if(mnth==7){
+      return("August")
+    }
+    else if(mnth==8){
+      return("Septemper")
+    }
+    else if(mnth==9){
+      return("October")
+    }
+    else if(mnth==10){
+      return("November")
+    }
+    else{
+      return("December")
+    }
+    
+  }
+
+
   getIndiaData() {
     this.DashSer.IndiaData().subscribe((Response) => {
-      console.log(Response)
-      this.IndiaLastUpdate = Response.KL.meta.last_updated;
-      console.log(this.IndiaLastUpdate)
-      let tempArr = this.IndiaLastUpdate.split('T')
-      console.log(tempArr)
-      this.IndiaLastUpdateDate = tempArr[0]
-      this.IndiaLastUpdateTime = tempArr[1].slice(0, 8)
-      console.log(this.IndiaLastUpdateTime)
-      this.getTotal(Response)
+      
+      this.getTotal(Response);
+      this.setMapColor(Response);
     },
       (Error) => {
         console.error("Error");
       });
   }
+
 
   getTotal(data) {
     let keys = [];
@@ -82,34 +132,44 @@ export class StatesComponent implements OnInit {
     console.log("IndiaTotalActive-" + this.IndiaTotalActive)
 
   }
+
+
   getNews() {
     this.DashSer.News().subscribe((Response) => {
 
-      this.News = Response;
+      this.News = Response.reverse();
       console.log(this.News)
-
-      // for (const element of Response)
-      //   {
-      //     this.News.push(element);
-      //   }
+      this.setLastUpdate(this.News[0].timestamp)
     },
       (Error) => {
         console.error("Error");
       });
   }
-  timestamp(stamp) {
-    var timestamp = stamp
-    var date = new Date(timestamp);
 
-    return( date.getDate() +
-      "/" + (date.getMonth() + 1) +
-      "/" + date.getFullYear() +
-      " " + date.getHours() +
-      ":" + date.getMinutes() +
-      ":" + date.getSeconds());
+  setMapColor(data){
+    let keys = [];
+    for (let key in data) {
+      keys.push({ key, value: data[key] });
+    }
   }
 
-  newsupdate(news){
-    return (news.replace(/\n/g, '; '))
+  setLastUpdate(timestamp){
+    let unix_timestamp = timestamp
+    var date = new Date(unix_timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var sec =  "0"+date.getSeconds();
+    var tdate= this.monthfinder(date.getMonth()) + " " + date.getDate()
+    var formattedTime =tdate +' , ' +  hours + ':' + minutes.substr(-2) + ":" + sec.substr(-2);
+   this.IndiaLastUpdateTime=formattedTime;
   }
+
+
+  newsupdate(news) {
+    return (news.replace('/n', '  |  '))
+  }
+
+
 }
+
+

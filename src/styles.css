@@ -26,8 +26,9 @@ body {
 }
 
 .lastupdate span {
-  color: green;
-  font-style: italic;
+  color: rgb(0, 161, 0);
+  font-weight: bold;
+  /* font-style: italic; */
 }
 
 .gradient-1 {
@@ -149,7 +150,7 @@ body {
 }
 
 .world-widget h5 {
-  color: #AEAED5;
+  color: #c7c7c7;
   margin-bottom: 5px;
   font-weight: normal;
   font-size: 14px;
@@ -223,15 +224,41 @@ body {
   color: rgb(252, 252, 252, .5);
   font-size: 20px;
 }
+.news-content{
+  height: 400px;
+}
 
 .newsdata {
-  font-size: 20px;
   color: rgb(252, 252, 252, .7);
   background-color: #2f3238;
   padding: 10px;
+  margin: 10px;
   border-radius: 7px;
 }
 
-.map {
-  background-color: #393e46;
+.news-time{
+  font-weight: bold;
+  color: rgb(0, 160, 0) !important;
+  font-size: 15px;
+  padding-bottom: 5px;
+  color: rgb(228, 228, 228);
+}
+.mapsvg{
+  stroke: rgb(88, 88, 88);
+  stroke-width: 0.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#svg2{
+  min-height: 70vh;
+  max-height: 85vh;
+}
+
+
+@media (max-width: 768px){
+  .mapsvg{
+    margin-top: 20px;
+  }
 }

@@ -18,13 +18,14 @@ export class StatesComponent implements OnInit {
   IndiaTotalOther: any = 0;
   IndiaLastUpdate: any;
   IndiaLastUpdateTime: any;
+  statewise:any=[];
   News: any;
+  highst:any=0;
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
   ngOnInit(): void {
     this.nav.routelinkr = 1;
-    console.log(this.nav.routelinkr)
     this.getIndiaData();
     this.getNews();
   }
@@ -105,31 +106,50 @@ export class StatesComponent implements OnInit {
     for (let key in data) {
       keys.push({ key, value: data[key] });
     }
-    // console.log(keys)
 
-    for (let i in keys) {
-      this.IndiaTotalCases += keys[i].value.total.confirmed;
-      this.IndiaTotalDead += keys[i].value.total.deceased;
-      this.IndiaTotalRecovered += keys[i].value.total.recovered;
-      this.IndiaTotalVaccinated += keys[i].value.total.vaccinated;
-      if (keys[i].value.total.other != null) {
-        this.IndiaTotalOther += keys[i].value.total.other;
+    for(let i in keys){
+      var ctotal;
+      // console.log(keys[i].value.total.other)
+      if(keys[i].key!="TT"){
+        if(keys[i].value.total.other==null){
+          ctotal=keys[i].value.total.confirmed-keys[i].value.total.deceased-keys[i].value.total.recovered
+          // console.log(ctotal)
+          this.statewise.push({ state: i , active: (ctotal)});
+          if(ctotal>this.highst){
+            this.highst=ctotal
+          }
+        }
+        else{
+          ctotal=keys[i].value.total.confirmed-keys[i].value.total.deceased-keys[i].value.total.recovered-keys[i].value.total.other
+          // console.log(ctotal)
+          this.statewise.push({ state: i , active: (ctotal)});
+          if(ctotal>this.highst){
+            this.highst=ctotal
+          }
+        }
       }
+      else{
+        this.statewise.push({ state: i , active: (0)});
+      }
+      
     }
-    this.IndiaTotalVaccinated = this.IndiaTotalVaccinated / 2;
-    this.IndiaTotalCases = this.IndiaTotalCases / 2;
-    this.IndiaTotalDead = this.IndiaTotalDead / 2;
-    this.IndiaTotalRecovered = this.IndiaTotalRecovered / 2;
-    this.IndiaTotalOther = this.IndiaTotalOther / 2;
-
+    
+    
+    
+     console.log(this.statewise)
+    this.IndiaTotalVaccinated = data["TT"].total.vaccinated
+    this.IndiaTotalCases = data["TT"].total.confirmed
+    this.IndiaTotalDead = data["TT"].total.deceased
+    this.IndiaTotalRecovered = data["TT"].total.recovered
+    this.IndiaTotalOther = data["TT"].total.other
     this.IndiaTotalActive = (this.IndiaTotalCases - this.IndiaTotalDead - this.IndiaTotalRecovered - this.IndiaTotalOther)
 
-    console.log("IndiaTotalVaccinated-" + this.IndiaTotalVaccinated)
-    console.log("IndiaTotalCases-" + this.IndiaTotalCases)
-    console.log("IndiaTotalDead-" + this.IndiaTotalDead)
-    console.log("IndiaTotalRecovered-" + this.IndiaTotalRecovered)
-    console.log("IndiaTotalOther-" + this.IndiaTotalOther)
-    console.log("IndiaTotalActive-" + this.IndiaTotalActive)
+    // console.log("IndiaTotalVaccinated-" + this.IndiaTotalVaccinated)
+    // console.log("IndiaTotalCases-" + this.IndiaTotalCases)
+    // console.log("IndiaTotalDead-" + this.IndiaTotalDead)
+    // console.log("IndiaTotalRecovered-" + this.IndiaTotalRecovered)
+    // console.log("IndiaTotalOther-" + this.IndiaTotalOther)
+    // console.log("IndiaTotalActive-" + this.IndiaTotalActive)
 
   }
 
@@ -138,7 +158,7 @@ export class StatesComponent implements OnInit {
     this.DashSer.News().subscribe((Response) => {
 
       this.News = Response.reverse();
-      console.log(this.News)
+      // console.log(this.News)
       this.setLastUpdate(this.News[0].timestamp)
     },
       (Error) => {
@@ -147,9 +167,76 @@ export class StatesComponent implements OnInit {
   }
 
   setMapColor(data){
-    let keys = [];
-    for (let key in data) {
-      keys.push({ key, value: data[key] });
+    console.log(this.statewise)
+    document.getElementById("AP").style.fill=this.setFill(this.statewise[1].active)
+    document.getElementById("AR").style.fill=this.setFill(this.statewise[2].active)
+    document.getElementById("AS").style.fill=this.setFill(this.statewise[3].active)
+    document.getElementById("BR").style.fill=this.setFill(this.statewise[4].active)
+    document.getElementById("CH").style.fill=this.setFill(this.statewise[5].active)
+    document.getElementById("CT").style.fill=this.setFill(this.statewise[6].active)
+    document.getElementById("DL").style.fill=this.setFill(this.statewise[7].active)
+    document.getElementById("DN").style.fill=this.setFill(this.statewise[8].active)
+    document.getElementById("GA").style.fill=this.setFill(this.statewise[9].active)
+    document.getElementById("GJ").style.fill=this.setFill(this.statewise[10].active)
+    document.getElementById("HP").style.fill=this.setFill(this.statewise[11].active)
+    document.getElementById("HR").style.fill=this.setFill(this.statewise[12].active)
+    document.getElementById("JH").style.fill=this.setFill(this.statewise[13].active)
+    document.getElementById("JK").style.fill=this.setFill(this.statewise[14].active)
+    document.getElementById("KA").style.fill=this.setFill(this.statewise[15].active)
+    document.getElementById("KL").style.fill=this.setFill(this.statewise[16].active)
+    document.getElementById("LD").style.fill=this.setFill(this.statewise[18].active)
+    document.getElementById("MH").style.fill=this.setFill(this.statewise[19].active)
+    document.getElementById("ML").style.fill=this.setFill(this.statewise[20].active)
+    document.getElementById("MN").style.fill=this.setFill(this.statewise[21].active)
+    document.getElementById("MP").style.fill=this.setFill(this.statewise[22].active)
+    document.getElementById("MZ").style.fill=this.setFill(this.statewise[23].active)
+    document.getElementById("NL").style.fill=this.setFill(this.statewise[24].active)
+    document.getElementById("OR").style.fill=this.setFill(this.statewise[25].active)
+    document.getElementById("PB").style.fill=this.setFill(this.statewise[26].active)
+    document.getElementById("PY").style.fill=this.setFill(this.statewise[27].active)
+    document.getElementById("RJ").style.fill=this.setFill(this.statewise[28].active)
+    document.getElementById("SK").style.fill=this.setFill(this.statewise[29].active)
+    document.getElementById("TG").style.fill=this.setFill(this.statewise[30].active)
+    document.getElementById("TN").style.fill=this.setFill(this.statewise[31].active)
+    document.getElementById("TR").style.fill=this.setFill(this.statewise[32].active)
+    document.getElementById("UP").style.fill=this.setFill(this.statewise[34].active)
+    document.getElementById("UT").style.fill=this.setFill(this.statewise[35].active)
+    document.getElementById("WB").style.fill=this.setFill(this.statewise[36].active)
+    
+    console.log(data)
+  }
+
+  setFill(total){
+    // console.log(state)
+    if(total>=(this.highst)-(this.highst/10)){
+      return("RED")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*2){
+      return("#c62828")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*3){
+      return("#d32f2f")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*4){
+      return("#e53935")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*5){
+      return("#f44336")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*6){
+      return("#ef5350")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*7){
+      return("#e57373")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*8){
+      return("#ef9a9a")
+    }
+    else if(total>=(this.highst)-(this.highst/10)*9){
+      return("#ffcdd2")
+    }
+    else{
+      return("#ffebee")
     }
   }
 
@@ -166,7 +253,7 @@ export class StatesComponent implements OnInit {
 
 
   newsupdate(news) {
-    return (news.replace('/n', '  |  '))
+    return (news.replace('\n', '  ~  '))
   }
 
 

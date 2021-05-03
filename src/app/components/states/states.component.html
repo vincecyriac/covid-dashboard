@@ -9,6 +9,47 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-sm-12">
+          <div class="col-12 text-center">
+            <div class="select" id-="state-select" (change)="stateDropdown($event)">
+              <select>
+                <option value="0" name="All States">All States</option>
+                <option value="AP" name="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="AR" name="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="AS" name="Assam">Assam</option>
+                <option value="BR" name="Bihar">Bihar</option>
+                <option value="CH" name="Chandigarh">Chandigarh</option>
+                <option value="CT" name="Chhattisgarh">Chhattisgarh</option>
+                <option value="DL" name="Delhi">Delhi</option>
+                <option value="DN" name="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                <option value="GA" name="Goa">Goa</option>
+                <option value="GJ" name="Gujarat">Gujarat</option>
+                <option value="HP" name="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="HR" name="Haryana">Haryana</option>
+                <option value="JH" name="Jharkhand">Jharkhand</option>
+                <option value="JK" name="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="KA" name="Karnataka">Karnataka</option>
+                <option value="KL" name="Kerala">Kerala</option>
+                <option value="LD" name="Lakshadweep">Lakshadweep</option>
+                <option value="MH" name="Maharashtra">Maharashtra</option>
+                <option value="ML" name="Meghalaya">Meghalaya</option>
+                <option value="MN" name="Manipur">Manipur</option>
+                <option value="MP" name="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="MZ" name="Mizoram">Mizoram</option>
+                <option value="NL" name="Nagaland">Nagaland</option>
+                <option value="OR" name="Odisha">Odisha</option>
+                <option value="PB" name="Punjab">Punjab</option>
+                <option value="PY" name="Puducherry">Puducherry</option>
+                <option value="RJ" name="Rajasthan">Rajasthan</option>
+                <option value="SK" name="Sikkim">Sikkim</option>
+                <option value="TG" name="Telangana">Telangana</option>
+                <option value="TN" name="Tamil Nadu">Tamil Nadu</option>
+                <option value="TR" name="Tripura">Tripura</option>
+                <option value="UP" name="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="UT" name="Uttarakhand">Uttarakhand</option>
+                <option value="WB" name="West Bengal">West Bengal</option>
+              </select>
+            </div>
+          </div>
           <div class="mapsvg">
             <svg  id="svg2" viewBox= "0 0 612 696">
               <path id="AP" title="Andhra Pradesh" (click)="stateclick($event)"

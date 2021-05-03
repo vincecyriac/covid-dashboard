@@ -252,8 +252,8 @@ body {
 }
 
 #svg2{
-  min-height: 70vh;
-  max-height: 85vh; 
+  min-height: 65vh;
+  max-height: 75vh; 
 }
 .map-legend{
   position: absolute;
@@ -266,6 +266,25 @@ body {
   height: 10px;
   background: -webkit-linear-gradient(to right, #47FF00, #FFF600,#FFAF00, #FF6900, #FF2300, #FF0000);
   background: linear-gradient(to right, #47FF00, #FFF600,#FFAF00, #FF6900, #FF2300, #FF0000);
+}
+
+.select select{
+  width: 100%;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
+  outline: 0;
+  background-color: #393e46;
+  border-radius: 5px;
+  border: 0;
+  color: white;
+  
+}
+.select select option{
+  border: 0 !important;
+  outline: 0 !important;
+  height: 10px;
 }
 
 @media (max-width: 768px){

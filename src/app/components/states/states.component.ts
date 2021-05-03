@@ -10,17 +10,20 @@ import { DashboardService } from 'src/app/service/dashboard.service';
 export class StatesComponent implements OnInit {
 
   result: any;
-  IndiaTotalCases: any = 0;
-  IndiaTotalActive: any = 0;
-  IndiaTotalDead: any = 0;
-  IndiaTotalRecovered: any = 0;
-  IndiaTotalVaccinated: any = 0;
-  IndiaTotalOther: any = 0;
+  TotalCases: any = 0;
+  TotalActive: any = 0;
+  TotalDead: any = 0;
+  TotalRecovered: any = 0;
+  TotalVaccinated: any = 0;
+  TotalOther: any = 0;
   IndiaLastUpdate: any;
   IndiaLastUpdateTime: any;
   statewise:any=[];
   News: any;
   highst:any=0;
+  currentState:any="All States";
+  fullIndia:any;
+  fullIndiaID:any;
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
@@ -102,9 +105,12 @@ export class StatesComponent implements OnInit {
 
 
   getTotal(data) {
+    this.fullIndia=data;
     let keys = [];
+    this.fullIndiaID=[];
     for (let key in data) {
       keys.push({ key, value: data[key] });
+      this.fullIndiaID.push({ key, value: data[key] });
     }
 
     for(let i in keys){
@@ -134,19 +140,12 @@ export class StatesComponent implements OnInit {
     
     
      console.log(this.statewise)
-    this.IndiaTotalVaccinated = data["TT"].total.vaccinated
-    this.IndiaTotalCases = data["TT"].total.confirmed
-    this.IndiaTotalDead = data["TT"].total.deceased
-    this.IndiaTotalRecovered = data["TT"].total.recovered
-    this.IndiaTotalOther = data["TT"].total.other
-    this.IndiaTotalActive = (this.IndiaTotalCases - this.IndiaTotalDead - this.IndiaTotalRecovered - this.IndiaTotalOther)
-
-    // console.log("IndiaTotalVaccinated-" + this.IndiaTotalVaccinated)
-    // console.log("IndiaTotalCases-" + this.IndiaTotalCases)
-    // console.log("IndiaTotalDead-" + this.IndiaTotalDead)
-    // console.log("IndiaTotalRecovered-" + this.IndiaTotalRecovered)
-    // console.log("IndiaTotalOther-" + this.IndiaTotalOther)
-    // console.log("IndiaTotalActive-" + this.IndiaTotalActive)
+    this.TotalVaccinated = data["TT"].total.vaccinated
+    this.TotalCases = data["TT"].total.confirmed
+    this.TotalDead = data["TT"].total.deceased
+    this.TotalRecovered = data["TT"].total.recovered
+    this.TotalOther = data["TT"].total.other
+    this.TotalActive = (this.TotalCases - this.TotalDead - this.TotalRecovered - this.TotalOther)
 
   }
 
@@ -199,8 +198,44 @@ export class StatesComponent implements OnInit {
     document.getElementById("UP").style.fill=this.setFill(this.statewise[34].active)
     document.getElementById("UT").style.fill=this.setFill(this.statewise[35].active)
     document.getElementById("WB").style.fill=this.setFill(this.statewise[36].active)
-    
-    console.log(data)
+  }
+
+  setMapGrey(){
+    console.log(this.statewise)
+    document.getElementById("AP").style.fill="grey"
+    document.getElementById("AR").style.fill="grey"
+    document.getElementById("AS").style.fill="grey"
+    document.getElementById("BR").style.fill="grey"
+    document.getElementById("CH").style.fill="grey"
+    document.getElementById("CT").style.fill="grey"
+    document.getElementById("DL").style.fill="grey"
+    document.getElementById("DN").style.fill="grey"
+    document.getElementById("GA").style.fill="grey"
+    document.getElementById("GJ").style.fill="grey"
+    document.getElementById("HP").style.fill="grey"
+    document.getElementById("HR").style.fill="grey"
+    document.getElementById("JH").style.fill="grey"
+    document.getElementById("JK").style.fill="grey"
+    document.getElementById("KA").style.fill="grey"
+    document.getElementById("KL").style.fill="grey"
+    document.getElementById("LD").style.fill="grey"
+    document.getElementById("MH").style.fill="grey"
+    document.getElementById("ML").style.fill="grey"
+    document.getElementById("MN").style.fill="grey"
+    document.getElementById("MP").style.fill="grey"
+    document.getElementById("MZ").style.fill="grey"
+    document.getElementById("NL").style.fill="grey"
+    document.getElementById("OR").style.fill="grey"
+    document.getElementById("PB").style.fill="grey"
+    document.getElementById("PY").style.fill="grey"
+    document.getElementById("RJ").style.fill="grey"
+    document.getElementById("SK").style.fill="grey"
+    document.getElementById("TG").style.fill="grey"
+    document.getElementById("TN").style.fill="grey"
+    document.getElementById("TR").style.fill="grey"
+    document.getElementById("UP").style.fill="grey"
+    document.getElementById("UT").style.fill="grey"
+    document.getElementById("WB").style.fill="grey"
   }
 
   setFill(total){
@@ -254,6 +289,24 @@ export class StatesComponent implements OnInit {
   }
 
 
+  /* ---------- MAP CLICK ------------------- */
+  stateclick(event){
+    this.setMapGrey();
+    console.log(event)
+    document.getElementById(event.srcElement.attributes.id.value).style.fill="#FF4600";
+    var state=event.srcElement.attributes.id.value;
+    this.currentState=event.srcElement.attributes.title.value;
+    this.TotalCases=this.fullIndia[state].total.confirmed;
+    this.TotalDead=this.fullIndia[state].total.deceased;
+    this.TotalRecovered=this.fullIndia[state].total.confirmed;
+    this.TotalVaccinated=this.fullIndia[state].total.vaccinated;
+    if(this.fullIndia[state].total.other!=null){
+      this.TotalActive=this.fullIndia[state].total.confirmed-this.fullIndia[state].total.recovered-this.fullIndia[state].total.other-this.fullIndia[state].total.deceased;
+    }
+    else{
+      this.TotalActive=this.fullIndia[state].total.confirmed-this.fullIndia[state].total.recovered-this.fullIndia[state].total.deceased;
+    }
+  }
 }
 
 

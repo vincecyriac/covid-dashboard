@@ -253,13 +253,13 @@ body {
 
 #svg2{
   min-height: 70vh;
-  max-height: 85vh;
+  max-height: 85vh; 
 }
 .map-legend{
   position: absolute;
   bottom: 10px;
   right: 50px;
-  width: 100px;
+  width: 150px;
 }
 .legend-bar{
   width: 100%;
@@ -271,5 +271,9 @@ body {
 @media (max-width: 768px){
   .mapsvg{
     margin-top: 20px;
+  }
+  #svg2{
+    min-height: 60vh;
+    max-height: 85vh;
   }
 }

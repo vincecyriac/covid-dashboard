@@ -109,11 +109,9 @@ export class StatesComponent implements OnInit {
 
     for(let i in keys){
       var ctotal;
-      // console.log(keys[i].value.total.other)
       if(keys[i].key!="TT"){
         if(keys[i].value.total.other==null){
           ctotal=keys[i].value.total.confirmed-keys[i].value.total.deceased-keys[i].value.total.recovered
-          // console.log(ctotal)
           this.statewise.push({ state: i , active: (ctotal)});
           if(ctotal>this.highst){
             this.highst=ctotal
@@ -121,7 +119,6 @@ export class StatesComponent implements OnInit {
         }
         else{
           ctotal=keys[i].value.total.confirmed-keys[i].value.total.deceased-keys[i].value.total.recovered-keys[i].value.total.other
-          // console.log(ctotal)
           this.statewise.push({ state: i , active: (ctotal)});
           if(ctotal>this.highst){
             this.highst=ctotal
@@ -208,35 +205,35 @@ export class StatesComponent implements OnInit {
 
   setFill(total){
     // console.log(state)
-    if(total>=(this.highst)-(this.highst/10)){
-      return("RED")
+    if(total>=(500000)){
+      return("#FF0000")
     }
-    else if(total>=(this.highst)-(this.highst/10)*2){
-      return("#c62828")
+    else if(total>=(400000)){
+      return("#FF2300")
     }
-    else if(total>=(this.highst)-(this.highst/10)*3){
-      return("#d32f2f")
+    else if(total>=300000){
+      return("#FF4600")
     }
-    else if(total>=(this.highst)-(this.highst/10)*4){
-      return("#e53935")
+    else if(total>=200000){
+      return("#FF6900")
     }
-    else if(total>=(this.highst)-(this.highst/10)*5){
-      return("#f44336")
+    else if(total>=100000){
+      return("#FF8C00")
     }
-    else if(total>=(this.highst)-(this.highst/10)*6){
-      return("#ef5350")
+    else if(total>=50000){
+      return("#FFAF00")
     }
-    else if(total>=(this.highst)-(this.highst/10)*7){
-      return("#e57373")
+    else if(total>=30000){
+      return("#FFD300")
     }
-    else if(total>=(this.highst)-(this.highst/10)*8){
-      return("#ef9a9a")
+    else if(total>=10000){
+      return("#FFF600")
     }
-    else if(total>=(this.highst)-(this.highst/10)*9){
-      return("#ffcdd2")
+    else if(total>=5000){
+      return("#D4FF00")
     }
     else{
-      return("#ffebee")
+      return("#47FF00")
     }
   }
 

@@ -287,12 +287,120 @@ body {
   height: 10px;
 }
 
-@media (max-width: 768px){
+.datatable{
+  margin: 20px 5% 10px 5%;;
+  background-color: #393e46;
+  padding: 20px;
+  border-radius: 5px;
+
+}
+
+table {
+  border: 1px solid rgb(122, 122, 122);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table tr {
+  background-color:transparent;
+  border: 1px solid rgb(119, 119, 119);
+  padding: .35em;
+}
+
+thead th{
+  color: #FCFCFCB3;
+}
+/* thead th{
+  color: #FCFCFCB3;
+  
+} */
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+  font-weight: bold;
+}
+table td[data-label="Confirmed"] {
+  color: #E23028 !important;
+}
+table td[data-label="Active"] {
+  color: #007BFF !important;
+}
+table td[data-label="Recovered"] {
+  color: #28a745 !important;
+}
+table td[data-label="Deceased"] {
+  color: #969696 !important;
+}
+table td[data-label="Vaccinated"] {
+  color: #DB5581 !important;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+/* table tr:first-child {
+  display :none;
+} */
+
+
+@media screen and (max-width: 768px){
   .mapsvg{
     margin-top: 20px;
   }
   #svg2{
     min-height: 60vh;
     max-height: 85vh;
+  }
+  
+}
+
+@media screen and (max-width: 930px){
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid rgb(119, 119, 119) !important;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+
+  table td[data-label="Vaccinated"] {
+    border-bottom: none !important;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }

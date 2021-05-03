@@ -24,6 +24,7 @@ export class StatesComponent implements OnInit {
   currentState: any = "All States";
   fullIndia: any;
   fullIndiaID: any;
+  toTable:any;
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
@@ -101,6 +102,7 @@ export class StatesComponent implements OnInit {
       this.currentState="All States"
       this.getTotal(Response);
       this.setMapColor(Response);
+      this.datatable(Response);
     },
       (Error) => {
         console.error("Error");
@@ -109,6 +111,7 @@ export class StatesComponent implements OnInit {
 
 
   getTotal(data) {
+    console.log(data)
     this.fullIndia = data;
     let keys = [];
     this.fullIndiaID = [];
@@ -339,6 +342,7 @@ export class StatesComponent implements OnInit {
 
   getstate(id) {
     switch (id) {
+      case "AN": return ("Andaman Nicobar")
       case "AP": return ("Andhra Pradesh");
       case "AR": return ("Arunachal Pradesh");
       case "AS": return ("Assam");
@@ -355,6 +359,7 @@ export class StatesComponent implements OnInit {
       case "JK": return ("Jammu and Kashmir");
       case "KA": return ("Karnataka");
       case "KL": return ("Kerala");
+      case "LA": return ("Ladakh")
       case "LD": return ("Lakshadweep");
       case "MH": return ("Maharashtra");
       case "ML": return ("Meghalaya");
@@ -414,6 +419,24 @@ export class StatesComponent implements OnInit {
       case "WB": return (34);
     }
 
+  }
+  datatable(data){
+    this.toTable = [];
+    for (let key in data) {
+      if(key!= 'TT'){
+        this.toTable.push({ key, value: data[key] });
+      }
+    }
+    console.log(this.toTable)
+  }
+
+  getActive(confirmed,recovered,deceased,other){
+    if(other!=null){
+      return(confirmed-recovered-deceased-other)
+    }
+    else{
+      return(confirmed-recovered-deceased)
+    }
   }
 }
 

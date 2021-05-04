@@ -19,4 +19,8 @@ export class DashboardService {
   {
     return this.http.get(this.API_ENDPOINT+"/updatelog/log.json");
   }
+  Timeseries(): Observable<any>
+  {
+    return this.http.get(this.API_ENDPOINT+"/v4/min/timeseries.min.json");
+  }
 }

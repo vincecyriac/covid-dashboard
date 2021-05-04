@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/service/dashboard.service';
+import { FormControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-states',
@@ -24,14 +26,31 @@ export class StatesComponent implements OnInit {
   currentState: any = "All States";
   fullIndia: any;
   fullIndiaID: any;
-  toTable:any;
+  toTable: any;
+  today: any;
+  dayConfirmed: any;
+  dayRecovered: any;
+  dayDeceased: any;
+  dayVaccinated: any;
+  dayTested:any;
+  maxDate: any;
+  minDate:any={ year: 2020, month: 6, day: 1 };
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
   ngOnInit(): void {
     this.nav.routelinkr = 1;
+    this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en')
+    
+    const fDateArr = this.today.split('-');
+    const fyear: number = parseInt(fDateArr[0]);
+    const fmonth: number = parseInt(fDateArr[1]);
+    const fday: number = parseInt(fDateArr[2]);
+    this.maxDate = { year: fyear, month: fmonth, day: fday };
+    this.DatePicker.controls['date'].setValue(this.maxDate);
     this.getIndiaData();
     this.getNews();
+
   }
 
 
@@ -39,6 +58,11 @@ export class StatesComponent implements OnInit {
     this.nav.routelinkr = 2;
     console.log(this.nav.routelinkr)
   }
+
+
+  DatePicker = new FormGroup({
+    date: new FormControl()
+  });
 
 
   timestampConvert(timestamp) {
@@ -95,14 +119,15 @@ export class StatesComponent implements OnInit {
 
   getIndiaData() {
     this.DashSer.IndiaData().subscribe((Response) => {
-      this.statewise= [];
-      this.fullIndia=[];
-      this.fullIndiaID=[];
+      this.statewise = [];
+      this.fullIndia = [];
+      this.fullIndiaID = [];
 
-      this.currentState="All States"
+      this.currentState = "All States"
       this.getTotal(Response);
       this.setMapColor(Response);
       this.datatable(Response);
+      this.getIndiaToday();
     },
       (Error) => {
         console.error("Error");
@@ -292,7 +317,7 @@ export class StatesComponent implements OnInit {
 
 
   newsupdate(news) {
-    return (news.replace('\n', '  ~  '))
+    return (news.replace(/\n/g, "~"))
   }
 
 
@@ -301,7 +326,7 @@ export class StatesComponent implements OnInit {
     this.setMapGrey();
     console.log(event)
     document.getElementById(event.srcElement.attributes.id.value).style.fill = "#FF4600";
-    document.querySelector('select').selectedIndex=this.getstateid(event.srcElement.attributes.id.value)
+    document.querySelector('select').selectedIndex = this.getstateid(event.srcElement.attributes.id.value)
     var state = event.srcElement.attributes.id.value;
     this.currentState = event.srcElement.attributes.title.value;
     this.TotalCases = this.fullIndia[state].total.confirmed;
@@ -334,7 +359,7 @@ export class StatesComponent implements OnInit {
         this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.deceased;
       }
     }
-    else{
+    else {
       this.getIndiaData()
     }
 
@@ -420,23 +445,117 @@ export class StatesComponent implements OnInit {
     }
 
   }
-  datatable(data){
+  datatable(data) {
     this.toTable = [];
     for (let key in data) {
-      if(key!= 'TT'){
+      if (key != 'TT') {
         this.toTable.push({ key, value: data[key] });
       }
     }
     console.log(this.toTable)
   }
 
-  getActive(confirmed,recovered,deceased,other){
-    if(other!=null){
-      return(confirmed-recovered-deceased-other)
+  getActive(confirmed, recovered, deceased, other) {
+    if (other != null) {
+      return (confirmed - recovered - deceased - other)
     }
-    else{
-      return(confirmed-recovered-deceased)
+    else {
+      return (confirmed - recovered - deceased)
     }
+  }
+
+  getIndiaToday() {
+    if (this.fullIndia["TT"].delta.vaccinated) {
+      this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated
+    }
+    else {
+      this.dayVaccinated = "N/A"
+    }
+
+    if (this.fullIndia["TT"].delta.confirmed) {
+      this.dayConfirmed = this.fullIndia["TT"].delta.confirmed;
+    }
+    else {
+      this.dayConfirmed = "N/A"
+    }
+
+    if (this.fullIndia["TT"].delta.deceased) {
+      this.dayDeceased = this.fullIndia["TT"].delta.deceased;
+    }
+    else {
+      this.dayDeceased = "N/A"
+    }
+
+    if (this.fullIndia["TT"].delta.recovered) {
+      this.dayRecovered = this.fullIndia["TT"].delta.recovered;
+    }
+    else {
+      this.dayRecovered = "N/A"
+    }
+    if (this.fullIndia["TT"].delta.tested) {
+      this.dayTested = this.fullIndia["TT"].delta.tested
+    }
+    else {
+      this.dayTested = "N/A"
+    }
+
+  }
+
+  GetDaywise(date) {
+    console.log(date)
+    this.DashSer.Timeseries().subscribe((Response) => {
+      var TTFul=Response["TT"].dates;
+      console.log(TTFul)
+      console.log(TTFul[date])
+
+
+
+      if (TTFul[date].delta.vaccinated) {
+        this.dayVaccinated = TTFul[date].delta.vaccinated
+      }
+      else {
+        this.dayVaccinated = "N/A"
+      }
+  
+      if (TTFul[date].delta.confirmed) {
+        this.dayConfirmed = TTFul[date].delta.confirmed;
+      }
+      else {
+        this.dayConfirmed = "N/A"
+      }
+  
+      if (TTFul[date].delta.deceased) {
+        this.dayDeceased = TTFul[date].delta.deceased;
+      }
+      else {
+        this.dayDeceased = "N/A"
+      }
+  
+      if (TTFul[date].delta.recovered) {
+        this.dayRecovered = TTFul[date].delta.recovered;
+      }
+      else {
+        this.dayRecovered = "N/A"
+      }
+      if (TTFul[date].delta.tested) {
+        this.dayTested = TTFul[date].delta.tested
+      }
+      else {
+        this.dayTested = "N/A"
+      }
+
+
+
+
+    },
+      (Error) => {
+        console.error("Error");
+      });
+  }
+  dateselect(date) {
+    let Selecteddate = date.year + '-' + ('0' + date.month).slice(-2) + '-' + ('0' + date.day).slice(-2);
+    console.log(Selecteddate)
+    this.GetDaywise(Selecteddate);
   }
 }
 

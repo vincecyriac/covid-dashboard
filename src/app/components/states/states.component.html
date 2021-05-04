@@ -198,31 +198,42 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col news-section">
-                  <div class="news">
-                    <div class="news-title">
-                      <div class="icon1 gradient-10">
-                        <i class="fa fa-bell"></i>
-                      </div>
-                      <div>
-                        <h2>Latest Updates</h2>
+                <div class="col-md-12 col-sm-12 col daywise-section">
+                  <div class="day-wise">
+
+                    <div class="row text-center">
+                      <div class="col-md-6 daywise-title">Day Wise Report</div>
+                      <div class="col-md-6">
+                        <form [formGroup]="DatePicker">
+                          <div class="input-group">
+                            <input class="form-control text-center" placeholder="yyyy-mm-dd" formControlName="date" [maxDate]="maxDate" [minDate]="minDate"
+                              name="dp" ngbDatepicker #d="ngbDatepicker" [readonly]="true" (click)="d.toggle()"
+                              (ngModelChange)="dateselect(DatePicker.controls['date'].value)">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"></button>
+                            </div>
+                          </div>
+                        </form>
+
                       </div>
                     </div>
-                    <div class="news-content">
-                      <ng-scrollbar>
-                        <div class="newsdata" *ngFor="let Updates of News">
-                          <div class="news-time">
-                            {{timestampConvert(Updates.timestamp)}}
-                          </div>
-                          <div class="news-update">
-                            {{newsupdate(Updates.update)}}
-                          </div>
-                        </div>
-                      </ng-scrollbar>
+                    <div class="row day-table">
+                      <div class="col-12">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td data-label="State"><!-- {{currentState}} --> All States</td>
+                              <td data-label="Confirmed">{{dayConfirmed}}</td>
+                              <td data-label="Recovered">{{dayRecovered}}</td>
+                              <td data-label="Deceased">{{dayDeceased}}</td>
+                              <td data-label="Vaccinated">{{dayVaccinated}}</td>
+                              <td data-label="Tested">{{dayTested}}</td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-
-
-
                   </div>
 
                 </div>
@@ -236,56 +247,36 @@
       </div>
 
     </section>
-    <section class="datatable">
-      <div class="data-section">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">State</th>
-              <th scope="col">Confirmed</th>
-              <th scope="col">Active</th>
-              <th scope="col">Recovered</th>
-              <th scope="col">Deceased</th>
-              <th scope="col">Vaccinated</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of toTable">
-              <td data-label="State">{{getstate(data.key)}}</td>
-              <td data-label="Confirmed">{{data.value.total.confirmed}}</td>
-              <td data-label="Active">{{getActive(data.value.total.confirmed,data.value.total.recovered,data.value.total.deceased,data.value.total.other)}}</td>
-              <td data-label="Recovered">{{data.value.total.recovered}}</td>
-              <td data-label="Deceased">{{data.value.total.deceased}}</td>
-              <td data-label="Vaccinated">{{data.value.total.vaccinated}}</td>
-            </tr>
-            <!-- <tr>
-              <td data-label="State">Visa - 3412</td>
-              <td data-label=" Confirmed">04/01/2016</td>
-              <td data-label="Active">$1,190</td>
-              <td data-label="Recovered">03/01/2016 - 03/31/2016</td>
-              <td data-label="Deceased">03/01/2016 - 03/31/2016</td>
-              <td data-label="Vaccinated">03/01/2016 - 03/31/2016</td>
-            </tr>
-            <tr>
-              <td data-label="State">Visa - 3412</td>
-              <td data-label=" Confirmed">04/01/2016</td>
-              <td data-label="Active">$1,190</td>
-              <td data-label="Recovered">03/01/2016 - 03/31/2016</td>
-              <td data-label="Deceased">03/01/2016 - 03/31/2016</td>
-              <td data-label="Vaccinated">03/01/2016 - 03/31/2016</td>
-            </tr>
-            <tr>
-              <td data-label="State">Visa - 3412</td>
-              <td data-label=" Confirmed">04/01/2016</td>
-              <td data-label="Active">$1,190</td>
-              <td data-label="Recovered">03/01/2016 - 03/31/2016</td>
-              <td data-label="Deceased">03/01/2016 - 03/31/2016</td>
-              <td data-label="Vaccinated">03/01/2016 - 03/31/2016</td>
-            </tr> -->
-            
-          </tbody>
-        </table>
+    
+
+
+
+
+    <div class="col-md-12 col-sm-12 col news-section">
+      <div class="news">
+        <div class="news-title">
+          <div class="icon1 gradient-10">
+            <i class="fa fa-bell"></i>
+          </div>
+          <div>
+            <h2>Latest Updates</h2>
+          </div>
+        </div>
+        <div class="news-content">
+          <ng-scrollbar>
+            <div class="newsdata" *ngFor="let Updates of News">
+              <div class="news-time">
+                {{timestampConvert(Updates.timestamp)}}
+              </div>
+              <div class="news-update">
+                {{newsupdate(Updates.update)}}
+              </div>
+            </div>
+          </ng-scrollbar>
+        </div>
       </div>
-    </section>
+    </div>
+
+
   </ng-scrollbar>
 </div>

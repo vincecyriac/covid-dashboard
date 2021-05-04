@@ -187,6 +187,7 @@ body {
 
 .news {
   background-color: #393e46;
+  margin: 0px 4% 40px 4%;
   padding: 20px 20px;
   border-radius: 5px;
 }
@@ -252,8 +253,8 @@ body {
 }
 
 #svg2{
-  min-height: 65vh;
-  max-height: 75vh; 
+  min-height: 62vh;
+  max-height: 62vh; 
 }
 .map-legend{
   position: absolute;
@@ -287,15 +288,74 @@ body {
   height: 10px;
 }
 
-.datatable{
+
+.day-wise {
+  background-color: #393e46;
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+.day-wise .ngb-dp-header{
+  background-color: #2f3238;
+}
+.day-wise .btn-light{
+  color:rgb(182, 182, 182)
+}
+.day-wise .ngb-dp-weekdays {
+  background-color: #2f3238;
+}
+
+.day-wise .form-control{
+  background-color:#2f3238 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  height: 44px;
+  cursor: pointer;
+  color: rgb(224, 224, 224) !important;
+}
+.daywise-title{
+  min-height:calc(1.5em + .75rem + 2px);
+  line-height: calc(1.5em + .75rem + 2px);
+  font-size: 20px;
+}
+.day-wise .dropdown-menu{
+  background-color: #2f3238 !important;
+  color: white !important;
+}
+.day-wise .ngb-dp-weekday{
+  color: #dddddd !important;
+}
+/* background: #fff url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e) right .75rem center/8px 10px no-repeat; */
+
+.day-wise .custom-select{
+  background: #393e46 ;
+  box-shadow: none !important;
+  border: 0 !important;
+  color: #d1d1d1;
+  margin-right: 5px;
+}
+.day-wise .btn-light:hover{
+  color:rgb(0, 0, 0)
+}
+.day-wise button{
+  background-color: #2f3238 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+
+
+
+/* .datatable{
   margin: 20px 5% 10px 5%;;
   background-color: #393e46;
   padding: 20px;
   border-radius: 5px;
 
-}
+} */
 
-table {
+.day-wise table {
   border: 1px solid rgb(122, 122, 122);
   border-collapse: collapse;
   margin: 0;
@@ -303,50 +363,80 @@ table {
   width: 100%;
   table-layout: fixed;
 }
+.day-wise .day-table{
+  margin-top: 20px;
+}
 
-table tr {
+.day-wise table tr {
   background-color:transparent;
   border: 1px solid rgb(119, 119, 119);
   padding: .35em;
 }
 
-thead th{
+.day-wise thead th{
   color: #FCFCFCB3;
 }
-/* thead th{
-  color: #FCFCFCB3;
-  
-} */
 
-table th,
+.day-wise table th,
 table td {
   padding: .625em;
   text-align: center;
-  font-weight: bold;
 }
-table td[data-label="Confirmed"] {
-  color: #E23028 !important;
-}
-table td[data-label="Active"] {
-  color: #007BFF !important;
-}
-table td[data-label="Recovered"] {
-  color: #28a745 !important;
-}
-table td[data-label="Deceased"] {
-  color: #969696 !important;
-}
-table td[data-label="Vaccinated"] {
-  color: #DB5581 !important;
-}
-table th {
+
+.day-wise table th {
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-/* table tr:first-child {
-  display :none;
-} */
+@media screen and (max-width: 1920px){
+  .day-wise table {
+    border: 0;
+  }
+
+  .day-wise table caption {
+    font-size: 1.3em;
+  }
+  
+  .day-wise table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .day-wise table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .day-wise table td {
+    border-bottom: 1px solid rgb(119, 119, 119) !important;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+
+  .day-wise table td[data-label="Tested"] {
+    border-bottom: none !important;
+  }
+  
+  .day-wise table td::before {
+    content: attr(data-label);
+    float: left;
+    color:rgb(170, 170, 170);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+} 
+
+
+
+
 
 
 @media screen and (max-width: 768px){
@@ -360,47 +450,20 @@ table th {
   
 }
 
-@media screen and (max-width: 930px){
-  table {
-    border: 0;
-  }
 
-  table caption {
-    font-size: 1.3em;
-  }
-  
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-  
-  table tr {
-    display: block;
-    margin-bottom: .625em;
-  }
-  
-  table td {
-    border-bottom: 1px solid rgb(119, 119, 119) !important;
-    display: block;
-    font-size: .8em;
-    text-align: right;
-  }
-  
 
-  table td[data-label="Vaccinated"] {
-    border-bottom: none !important;
-  }
-  
-  table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+
+
+.district {
+  height: calc(100vh - 65px);
+  margin-top: 65px;
+  color: white;
+}
+
+.sss{
+  height: calc(100vh - 65px);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

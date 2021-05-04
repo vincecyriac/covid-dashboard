@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
+<div class="spinner" *ngIf="loaded==true">
+  <div class="gif"></div>
+</div>
 <div class="dashboard">
   <ng-scrollbar id="states">
     <section class="dash-section">
@@ -198,6 +201,10 @@
                     </div>
                   </div>
                 </div>
+                
+
+              </div>
+              <div class="row">
                 <div class="col-md-12 col-sm-12 col daywise-section">
                   <div class="day-wise">
 
@@ -222,7 +229,7 @@
                         <table>
                           <tbody>
                             <tr>
-                              <td data-label="State"><!-- {{currentState}} --> All States</td>
+                              <td data-label="State">{{currentState}}</td>
                               <td data-label="Confirmed">{{dayConfirmed}}</td>
                               <td data-label="Recovered">{{dayRecovered}}</td>
                               <td data-label="Deceased">{{dayDeceased}}</td>
@@ -237,7 +244,6 @@
                   </div>
 
                 </div>
-
               </div>
             </div>
           </div>

@@ -32,16 +32,20 @@ export class StatesComponent implements OnInit {
   dayRecovered: any;
   dayDeceased: any;
   dayVaccinated: any;
-  dayTested:any;
+  dayTested: any;
   maxDate: any;
-  minDate:any={ year: 2020, month: 6, day: 1 };
+  minDate: any = { year: 2020, month: 6, day: 1 };
+  IndiaDaywise: any;
+  currentStateId: any = "0";
+  loaded: boolean;
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
   ngOnInit(): void {
+    this.loaded = true;
     this.nav.routelinkr = 1;
     this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en')
-    
+
     const fDateArr = this.today.split('-');
     const fyear: number = parseInt(fDateArr[0]);
     const fmonth: number = parseInt(fDateArr[1]);
@@ -50,6 +54,7 @@ export class StatesComponent implements OnInit {
     this.DatePicker.controls['date'].setValue(this.maxDate);
     this.getIndiaData();
     this.getNews();
+    this.IndiaTimeseries();
 
   }
 
@@ -124,6 +129,7 @@ export class StatesComponent implements OnInit {
       this.fullIndiaID = [];
 
       this.currentState = "All States"
+      this.currentStateId = "0";
       this.getTotal(Response);
       this.setMapColor(Response);
       this.datatable(Response);
@@ -195,7 +201,6 @@ export class StatesComponent implements OnInit {
   }
 
   setMapColor(data) {
-    console.log(this.statewise)
     document.getElementById("AP").style.fill = this.setFill(this.statewise[1].active)
     document.getElementById("AR").style.fill = this.setFill(this.statewise[2].active)
     document.getElementById("AS").style.fill = this.setFill(this.statewise[3].active)
@@ -233,7 +238,6 @@ export class StatesComponent implements OnInit {
   }
 
   setMapGrey() {
-    console.log(this.statewise)
     document.getElementById("AP").style.fill = "grey"
     document.getElementById("AR").style.fill = "grey"
     document.getElementById("AS").style.fill = "grey"
@@ -329,6 +333,7 @@ export class StatesComponent implements OnInit {
     document.querySelector('select').selectedIndex = this.getstateid(event.srcElement.attributes.id.value)
     var state = event.srcElement.attributes.id.value;
     this.currentState = event.srcElement.attributes.title.value;
+    this.currentStateId = state;
     this.TotalCases = this.fullIndia[state].total.confirmed;
     this.TotalDead = this.fullIndia[state].total.deceased;
     this.TotalRecovered = this.fullIndia[state].total.confirmed;
@@ -339,15 +344,19 @@ export class StatesComponent implements OnInit {
     else {
       this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.deceased;
     }
+    this.GetDaywise(this.today, this.currentStateId);
+    this.DatePicker.controls['date'].setValue(this.maxDate);
   }
 
   stateDropdown(event) {
+    // console.log(event.srcElement.value);
     if (event.srcElement.value != 0) {
       var state = event.srcElement.value;
       this.setMapGrey();
       console.log(event)
       document.getElementById(state).style.fill = "#FF4600";
       this.currentState = this.getstate(state);
+      this.currentStateId = state;
       this.TotalCases = this.fullIndia[state].total.confirmed;
       this.TotalDead = this.fullIndia[state].total.deceased;
       this.TotalRecovered = this.fullIndia[state].total.confirmed;
@@ -358,9 +367,13 @@ export class StatesComponent implements OnInit {
       else {
         this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.deceased;
       }
+      // this.stateDaywise(state);
+      this.GetDaywise(this.today, this.currentStateId);
+      this.DatePicker.controls['date'].setValue(this.maxDate);
     }
     else {
       this.getIndiaData()
+      this.GetDaywise(this.today, "0");
     }
 
   }
@@ -500,62 +513,125 @@ export class StatesComponent implements OnInit {
     }
 
   }
+  IndiaTimeseries() {
 
-  GetDaywise(date) {
-    console.log(date)
     this.DashSer.Timeseries().subscribe((Response) => {
-      var TTFul=Response["TT"].dates;
-      console.log(TTFul)
-      console.log(TTFul[date])
-
-
-
-      if (TTFul[date].delta.vaccinated) {
-        this.dayVaccinated = TTFul[date].delta.vaccinated
+      this.IndiaDaywise = Response;
+      if (this.IndiaDaywise != null || this.fullIndia != null) {
+        this.loaded = false;
       }
-      else {
-        this.dayVaccinated = "N/A"
-      }
-  
-      if (TTFul[date].delta.confirmed) {
-        this.dayConfirmed = TTFul[date].delta.confirmed;
-      }
-      else {
-        this.dayConfirmed = "N/A"
-      }
-  
-      if (TTFul[date].delta.deceased) {
-        this.dayDeceased = TTFul[date].delta.deceased;
-      }
-      else {
-        this.dayDeceased = "N/A"
-      }
-  
-      if (TTFul[date].delta.recovered) {
-        this.dayRecovered = TTFul[date].delta.recovered;
-      }
-      else {
-        this.dayRecovered = "N/A"
-      }
-      if (TTFul[date].delta.tested) {
-        this.dayTested = TTFul[date].delta.tested
-      }
-      else {
-        this.dayTested = "N/A"
-      }
-
-
-
 
     },
       (Error) => {
         console.error("Error");
       });
+
+
+  }
+
+  GetDaywise(date, state) {
+    console.log(date)
+    if (state == "0") {
+      var TTFul = this.IndiaDaywise["TT"].dates;
+      console.log(TTFul)
+      console.log(TTFul[date])
+      if(TTFul[date].delta){
+        if (TTFul[date].delta.vaccinated) {
+          this.dayVaccinated = TTFul[date].delta.vaccinated
+        }
+        else {
+          this.dayVaccinated = "N/A"
+        }
+  
+        if (TTFul[date].delta.confirmed) {
+          this.dayConfirmed = TTFul[date].delta.confirmed;
+        }
+        else {
+          this.dayConfirmed = "N/A"
+        }
+  
+        if (TTFul[date].delta.deceased) {
+          this.dayDeceased = TTFul[date].delta.deceased;
+        }
+        else {
+          this.dayDeceased = "N/A"
+        }
+  
+        if (TTFul[date].delta.recovered) {
+          this.dayRecovered = TTFul[date].delta.recovered;
+        }
+        else {
+          this.dayRecovered = "N/A"
+        }
+        if (TTFul[date].delta.tested) {
+          this.dayTested = TTFul[date].delta.tested
+        }
+        else {
+          this.dayTested = "N/A"
+        }
+      }
+      else{
+        this.dayTested = "N/A";
+        this.dayRecovered = "N/A";
+        this.dayDeceased = "N/A";
+        this.dayConfirmed = "N/A";
+        this.dayVaccinated = "N/A";
+      }
+    }
+    else {
+      var TTFul = this.IndiaDaywise[state].dates;
+      console.log(TTFul)
+      console.log(TTFul[date])
+
+
+      if(TTFul[date].delta){
+        if (TTFul[date].delta.vaccinated) {
+          this.dayVaccinated = TTFul[date].delta.vaccinated
+        }
+        else {
+          this.dayVaccinated = "N/A"
+        }
+  
+        if (TTFul[date].delta.confirmed) {
+          this.dayConfirmed = TTFul[date].delta.confirmed;
+        }
+        else {
+          this.dayConfirmed = "N/A"
+        }
+  
+        if (TTFul[date].delta.deceased) {
+          this.dayDeceased = TTFul[date].delta.deceased;
+        }
+        else {
+          this.dayDeceased = "N/A"
+        }
+  
+        if (TTFul[date].delta.recovered) {
+          this.dayRecovered = TTFul[date].delta.recovered;
+        }
+        else {
+          this.dayRecovered = "N/A"
+        }
+        if (TTFul[date].delta.tested) {
+          this.dayTested = TTFul[date].delta.tested
+        }
+        else {
+          this.dayTested = "N/A"
+        }
+      }
+      else{
+        this.dayTested = "N/A";
+        this.dayRecovered = "N/A";
+        this.dayDeceased = "N/A";
+        this.dayConfirmed = "N/A";
+        this.dayVaccinated = "N/A";
+      }
+    }
   }
   dateselect(date) {
     let Selecteddate = date.year + '-' + ('0' + date.month).slice(-2) + '-' + ('0' + date.day).slice(-2);
     console.log(Selecteddate)
-    this.GetDaywise(Selecteddate);
+    this.GetDaywise(Selecteddate, this.currentStateId);
   }
 }
 

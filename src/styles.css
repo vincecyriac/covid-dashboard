@@ -15,6 +15,26 @@ body {
   color: white;
 }
 
+.spinner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: calc(100vh - 65px);
+  width: 100vw;
+  margin-top: 65px;
+  background-color: rgba(51, 51, 51, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gif{
+  background: url('./assets/loading.gif');
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+}
+
 .dash-section {
   padding: 10px 4% 10px 4%;
 }

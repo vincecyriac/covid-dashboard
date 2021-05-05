@@ -276,6 +276,11 @@ body {
   min-height: 62vh;
   max-height: 62vh; 
 }
+
+#svg2 path:hover{
+  fill: #FF4600 !important;
+  transition: fill .4s ease-in-out;
+}
 .map-legend{
   position: absolute;
   bottom: 10px;

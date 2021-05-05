@@ -133,7 +133,8 @@ export class StatesComponent implements OnInit {
       this.getTotal(Response);
       this.setMapColor(Response);
       this.datatable(Response);
-      this.getIndiaToday();
+      // this.getIndiaToday();
+      console.log(this.today)
     },
       (Error) => {
         console.error("Error");
@@ -476,47 +477,11 @@ export class StatesComponent implements OnInit {
       return (confirmed - recovered - deceased)
     }
   }
-
-  getIndiaToday() {
-    if (this.fullIndia["TT"].delta.vaccinated) {
-      this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated
-    }
-    else {
-      this.dayVaccinated = "N/A"
-    }
-
-    if (this.fullIndia["TT"].delta.confirmed) {
-      this.dayConfirmed = this.fullIndia["TT"].delta.confirmed;
-    }
-    else {
-      this.dayConfirmed = "N/A"
-    }
-
-    if (this.fullIndia["TT"].delta.deceased) {
-      this.dayDeceased = this.fullIndia["TT"].delta.deceased;
-    }
-    else {
-      this.dayDeceased = "N/A"
-    }
-
-    if (this.fullIndia["TT"].delta.recovered) {
-      this.dayRecovered = this.fullIndia["TT"].delta.recovered;
-    }
-    else {
-      this.dayRecovered = "N/A"
-    }
-    if (this.fullIndia["TT"].delta.tested) {
-      this.dayTested = this.fullIndia["TT"].delta.tested
-    }
-    else {
-      this.dayTested = "N/A"
-    }
-
-  }
   IndiaTimeseries() {
 
     this.DashSer.Timeseries().subscribe((Response) => {
       this.IndiaDaywise = Response;
+      this.GetDaywise(this.today, "0")
       if (this.IndiaDaywise != null || this.fullIndia != null) {
         this.loaded = false;
       }
@@ -530,103 +495,109 @@ export class StatesComponent implements OnInit {
   }
 
   GetDaywise(date, state) {
+    var TTFul = this.IndiaDaywise["TT"].dates;
     console.log(date)
-    if (state == "0") {
-      var TTFul = this.IndiaDaywise["TT"].dates;
-      console.log(TTFul)
-      console.log(TTFul[date])
-      if(TTFul[date].delta){
-        if (TTFul[date].delta.vaccinated) {
-          this.dayVaccinated = TTFul[date].delta.vaccinated
-        }
-        else {
-          this.dayVaccinated = "N/A"
-        }
-  
-        if (TTFul[date].delta.confirmed) {
-          this.dayConfirmed = TTFul[date].delta.confirmed;
-        }
-        else {
-          this.dayConfirmed = "N/A"
-        }
-  
-        if (TTFul[date].delta.deceased) {
-          this.dayDeceased = TTFul[date].delta.deceased;
-        }
-        else {
-          this.dayDeceased = "N/A"
-        }
-  
-        if (TTFul[date].delta.recovered) {
-          this.dayRecovered = TTFul[date].delta.recovered;
-        }
-        else {
-          this.dayRecovered = "N/A"
-        }
-        if (TTFul[date].delta.tested) {
-          this.dayTested = TTFul[date].delta.tested
-        }
-        else {
-          this.dayTested = "N/A"
-        }
-      }
-      else{
-        this.dayTested = "N/A";
-        this.dayRecovered = "N/A";
-        this.dayDeceased = "N/A";
-        this.dayConfirmed = "N/A";
-        this.dayVaccinated = "N/A";
-      }
-    }
-    else {
-      var TTFul = this.IndiaDaywise[state].dates;
-      console.log(TTFul)
-      console.log(TTFul[date])
 
+    if(TTFul[date]){
 
-      if(TTFul[date].delta){
-        if (TTFul[date].delta.vaccinated) {
-          this.dayVaccinated = TTFul[date].delta.vaccinated
+      if (state == "0") {
+        if(TTFul[date].delta){
+          if (TTFul[date].delta.vaccinated) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated
+          }
+          else {
+            this.dayVaccinated = "N/A"
+          }
+    
+          if (TTFul[date].delta.confirmed) {
+            this.dayConfirmed = TTFul[date].delta.confirmed;
+          }
+          else {
+            this.dayConfirmed = "N/A"
+          }
+    
+          if (TTFul[date].delta.deceased) {
+            this.dayDeceased = TTFul[date].delta.deceased;
+          }
+          else {
+            this.dayDeceased = "N/A"
+          }
+    
+          if (TTFul[date].delta.recovered) {
+            this.dayRecovered = TTFul[date].delta.recovered;
+          }
+          else {
+            this.dayRecovered = "N/A"
+          }
+          if (TTFul[date].delta.tested) {
+            this.dayTested = TTFul[date].delta.tested
+          }
+          else {
+            this.dayTested = "N/A"
+          }
         }
-        else {
-          this.dayVaccinated = "N/A"
-        }
-  
-        if (TTFul[date].delta.confirmed) {
-          this.dayConfirmed = TTFul[date].delta.confirmed;
-        }
-        else {
-          this.dayConfirmed = "N/A"
-        }
-  
-        if (TTFul[date].delta.deceased) {
-          this.dayDeceased = TTFul[date].delta.deceased;
-        }
-        else {
-          this.dayDeceased = "N/A"
-        }
-  
-        if (TTFul[date].delta.recovered) {
-          this.dayRecovered = TTFul[date].delta.recovered;
-        }
-        else {
-          this.dayRecovered = "N/A"
-        }
-        if (TTFul[date].delta.tested) {
-          this.dayTested = TTFul[date].delta.tested
-        }
-        else {
-          this.dayTested = "N/A"
+        else{
+          this.dayTested = "N/A";
+          this.dayRecovered = "N/A";
+          this.dayDeceased = "N/A";
+          this.dayConfirmed = "N/A";
+          this.dayVaccinated = "N/A";
         }
       }
-      else{
-        this.dayTested = "N/A";
-        this.dayRecovered = "N/A";
-        this.dayDeceased = "N/A";
-        this.dayConfirmed = "N/A";
-        this.dayVaccinated = "N/A";
+      else {
+        if(TTFul[date].delta){
+          if (TTFul[date].delta.vaccinated) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated
+          }
+          else {
+            this.dayVaccinated = "N/A"
+          }
+    
+          if (TTFul[date].delta.confirmed) {
+            this.dayConfirmed = TTFul[date].delta.confirmed;
+          }
+          else {
+            this.dayConfirmed = "N/A"
+          }
+    
+          if (TTFul[date].delta.deceased) {
+            this.dayDeceased = TTFul[date].delta.deceased;
+          }
+          else {
+            this.dayDeceased = "N/A"
+          }
+    
+          if (TTFul[date].delta.recovered) {
+            this.dayRecovered = TTFul[date].delta.recovered;
+          }
+          else {
+            this.dayRecovered = "N/A"
+          }
+          if (TTFul[date].delta.tested) {
+            this.dayTested = TTFul[date].delta.tested
+          }
+          else {
+            this.dayTested = "N/A"
+          }
+        }
+        else{
+          this.dayTested = "N/A";
+          this.dayRecovered = "N/A";
+          this.dayDeceased = "N/A";
+          this.dayConfirmed = "N/A";
+          this.dayVaccinated = "N/A";
+        }
       }
+
     }
+    else{
+      this.dayTested = "N/A";
+      this.dayRecovered = "N/A";
+      this.dayDeceased = "N/A";
+      this.dayConfirmed = "N/A";
+      this.dayVaccinated = "N/A";
+    }
+    
   }
   dateselect(date) {
     let Selecteddate = date.year + '-' + ('0' + date.month).slice(-2) + '-' + ('0' + date.day).slice(-2);

@@ -211,6 +211,11 @@ body {
 .dis-section{
   margin: 0px 15px;
 }
+.diswise-title{
+  min-height:calc(1.5em + .75rem + 2px);
+  line-height: calc(1.5em + .75rem + 2px);
+  font-size: 20px;
+}
 
 
 
@@ -470,6 +475,89 @@ table td {
     text-transform: uppercase;
   }
 } 
+
+
+/* diswise table */
+
+.dis-table table {
+  border: 1px solid rgb(122, 122, 122);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+.dis-table .day-table{
+  margin-top: 20px;
+}
+
+.dis-table table tr {
+  background-color:transparent;
+  border: 1px solid rgb(119, 119, 119);
+  padding: .35em;
+}
+
+.dis-table thead th{
+  color: #FCFCFCB3;
+}
+
+.dis-table table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.dis-table table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 1920px){
+  .dis-table table {
+    border: 0;
+  }
+
+  .dis-table table caption {
+    font-size: 1.3em;
+  }
+  
+  .dis-table table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .dis-table table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .dis-table table td {
+    border-bottom: 1px solid rgb(119, 119, 119) !important;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+
+  .dis-table table td[data-label="Tested"] {
+    border-bottom: none !important;
+  }
+  
+  .dis-table table td::before {
+    content: attr(data-label);
+    float: left;
+    color:rgb(170, 170, 170);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+} 
+/* ================== */
 
 
 

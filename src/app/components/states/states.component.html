@@ -258,22 +258,37 @@
       <div class="row">
 
         <div class="col-md-6 col-sm-12">
-          <!-- <div class="dis-section">
+          <div class="dis-section">
             <div class="dis">
               <div class="row text-center">
-                <div class="col-md-6 daywise-title">Day Wise Report</div>
+                <div class="col-md-6 diswise-title">Day Wise Report</div>
                 <div class="col-md-6">
-                  <div class="select" id-="state-select" (change)="stateDropdown($event)">
+                  <div class="select" id-="state-select">
                     <select>
-                      <option value="0" name="All States">All States</option>
-                      <option value="AP" name="Andhra Pradesh">Andhra Pradesh</option>
+                      <option *ngFor="let dis of districts">{{dis}}</option>
                       
                     </select>
                   </div>
                 </div>
               </div>
+              <div class="row dis-table">
+                <div class="col-12">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td data-label="Confirmed">{{disConfirmed}}</td>
+                        <td data-label="Recovered">{{disRecovered}}</td>
+                        <td data-label="Deceased">{{disDeceased}}</td>
+                        <td data-label="Vaccinated">{{disVaccinated}}</td>
+                        <td data-label="Tested">{{disTested}}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div> -->
+          </div>
         </div>
 
       <div class="col-md-6 col-sm-12 ">

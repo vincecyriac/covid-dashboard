@@ -38,6 +38,13 @@ export class StatesComponent implements OnInit {
   IndiaDaywise: any;
   currentStateId: any = "0";
   loaded: boolean;
+  districts:any=["Please select a state"];
+  disConfirmed: any="N/A";
+  disRecovered: any="N/A";
+  disDeceased: any="N/A";
+  disVaccinated: any="N/A";
+  disTested: any="N/A";
+  disActive:any="N/A";
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
@@ -61,7 +68,6 @@ export class StatesComponent implements OnInit {
 
   ngOnDestroy() {
     this.nav.routelinkr = 2;
-    console.log(this.nav.routelinkr)
   }
 
 
@@ -142,7 +148,6 @@ export class StatesComponent implements OnInit {
 
 
   getTotal(data) {
-    console.log(data)
     this.fullIndia = data;
     let keys = [];
     this.fullIndiaID = [];
@@ -176,8 +181,6 @@ export class StatesComponent implements OnInit {
     }
 
 
-
-    console.log(this.statewise)
     this.TotalVaccinated = data["TT"].total.vaccinated
     this.TotalCases = data["TT"].total.confirmed
     this.TotalDead = data["TT"].total.deceased
@@ -192,7 +195,6 @@ export class StatesComponent implements OnInit {
     this.DashSer.News().subscribe((Response) => {
 
       this.News = Response.reverse();
-      // console.log(this.News)
       this.setLastUpdate(this.News[0].timestamp)
     },
       (Error) => {
@@ -275,7 +277,6 @@ export class StatesComponent implements OnInit {
   }
 
   setFill(total) {
-    // console.log(state)
     if (total >= (500000)) {
       return ("#FF0000")
     }
@@ -328,7 +329,6 @@ export class StatesComponent implements OnInit {
   /* ---------- MAP CLICK ------------------- */
   stateclick(event) {
     this.setMapGrey();
-    console.log(event)
     document.getElementById(event.srcElement.attributes.id.value).style.fill = "#FF4600";
     document.querySelector('select').selectedIndex = this.getstateid(event.srcElement.attributes.id.value)
     var state = event.srcElement.attributes.id.value;
@@ -349,11 +349,9 @@ export class StatesComponent implements OnInit {
   }
 
   stateDropdown(event) {
-    // console.log(event.srcElement.value);
     if (event.srcElement.value != 0) {
       var state = event.srcElement.value;
       this.setMapGrey();
-      console.log(event)
       document.getElementById(state).style.fill = "#FF4600";
       this.currentState = this.getstate(state);
       this.currentStateId = state;
@@ -370,6 +368,7 @@ export class StatesComponent implements OnInit {
       // this.stateDaywise(state);
       this.GetDaywise(this.today, this.currentStateId);
       this.DatePicker.controls['date'].setValue(this.maxDate);
+      this.pushDistricts(this.currentStateId);
     }
     else {
       this.getIndiaData()
@@ -465,7 +464,6 @@ export class StatesComponent implements OnInit {
         this.toTable.push({ key, value: data[key] });
       }
     }
-    console.log(this.toTable)
   }
 
   getActive(confirmed, recovered, deceased, other) {
@@ -542,7 +540,6 @@ export class StatesComponent implements OnInit {
   }
 
   GetDaywise(date, state) {
-    console.log(date)
     if (state == "0") {
       var TTFul = this.IndiaDaywise["TT"].dates;
       if(TTFul[date]){
@@ -600,8 +597,6 @@ export class StatesComponent implements OnInit {
     }
     else {
       var TTFul = this.IndiaDaywise[state].dates;
-      console.log(TTFul)
-      console.log(TTFul[date])
 
 
       if(TTFul[date]){
@@ -659,9 +654,75 @@ export class StatesComponent implements OnInit {
   }
   dateselect(date) {
     let Selecteddate = date.year + '-' + ('0' + date.month).slice(-2) + '-' + ('0' + date.day).slice(-2);
-    console.log(Selecteddate)
     this.GetDaywise(Selecteddate, this.currentStateId);
   }
+
+
+  pushDistricts(state){
+    this.districts=[]
+    var disData=this.fullIndia[state].districts
+    var keys=[];
+    for (let key in disData) {
+      keys.push({ key, value: disData[key] });
+    }
+    keys.forEach(element => {
+      this.districts.push(element.key)     
+    });
+    this.getDisData(state,this.districts[0])
+  }
+
+  getDisData(state,district){
+    console.log(state + "-" + district)
+    var AllDisData=this.fullIndia[state].districts;
+    console.log(AllDisData)
+    console.log(AllDisData[district].total.confirmed)
+
+    if(AllDisData[district].total.confirmed){
+      this.disConfirmed=AllDisData[district].total.confirmed;
+    }
+    else{
+      this.disConfirmed="N/A";
+    }
+
+    if(AllDisData[district].total.deceased){
+      this.disDeceased=AllDisData[district].total.deceased;
+    }
+    else{
+      this.disDeceased="N/A";
+    }
+
+    if(AllDisData[district].total.recovered){
+      this.disRecovered=AllDisData[district].total.recovered;
+    }
+    else{
+      this.disRecovered="N/A";
+    }
+
+    if(AllDisData[district].total.recovered){
+      this.disRecovered=AllDisData[district].total.recovered;
+    }
+    else{
+      this.disRecovered="N/A";
+    }
+
+    if(AllDisData[district].total.tested){
+      this.disTested=AllDisData[district].total.tested;
+    }
+    else{
+      this.disTested="N/A";
+    }
+    if(AllDisData[district].total.vaccinated){
+      this.disVaccinated=AllDisData[district].total.vaccinated;
+    }
+    else{
+      this.disVaccinated="N/A";
+    }
+
+
+    
+  }
+
+
 }
 
 

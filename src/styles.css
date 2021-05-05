@@ -40,6 +40,7 @@ body {
 }
 
 
+
 .lastupdate {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -202,15 +203,26 @@ body {
 }
 
 
+.dis{
+  background-color: #393e46;
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+.dis-section{
+  margin: 0px 15px;
+}
 
 
 
 .news {
   background-color: #393e46;
-  margin: 0px 4% 40px 4%;
   padding: 20px 20px;
   border-radius: 5px;
 }
+.news-section{
+  margin: 0px 15px;
+}
+
 
 .news-title {
   height: 2rem;
@@ -279,7 +291,7 @@ body {
 
 #svg2 path:hover{
   fill: #FF4600 !important;
-  transition: fill .4s ease-in-out;
+  transition: fill .2s ease-in-out;
 }
 .map-legend{
   position: absolute;

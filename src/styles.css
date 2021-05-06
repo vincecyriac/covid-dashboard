@@ -7,6 +7,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: #222831 !important;
+  font-family: 'poppins';
 }
 
 .dashboard {
@@ -215,6 +216,7 @@ body {
   min-height:calc(1.5em + .75rem + 2px);
   line-height: calc(1.5em + .75rem + 2px);
   font-size: 20px;
+  font-family: 'poppins';
 }
 
 
@@ -263,7 +265,7 @@ body {
   font-size: 20px;
 }
 .news-content{
-  height: 400px;
+  height: 430px;
 }
 
 .newsdata {
@@ -359,6 +361,7 @@ body {
   min-height:calc(1.5em + .75rem + 2px);
   line-height: calc(1.5em + .75rem + 2px);
   font-size: 20px;
+  font-family: 'poppins';
 }
 .day-wise .dropdown-menu{
   background-color: #2f3238 !important;
@@ -478,6 +481,10 @@ table td {
 
 
 /* diswise table */
+.dis select{
+  background-color: #2F3238 !important;
+  
+}
 
 .dis-table table {
   border: 1px solid rgb(122, 122, 122);
@@ -512,7 +519,10 @@ table td {
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-@media screen and (max-width: 1920px){
+.dis-table .disTable-title{
+  font-size: 17px;
+}
+@media screen and (max-width: 11920px){
   .dis-table table {
     border: 0;
   }
@@ -545,7 +555,7 @@ table td {
   }
   
 
-  .dis-table table td[data-label="Tested"] {
+  .dis-table table td:last-child {
     border-bottom: none !important;
   }
   
@@ -557,6 +567,7 @@ table td {
     text-transform: uppercase;
   }
 } 
+
 /* ================== */
 
 
@@ -571,6 +582,9 @@ table td {
   #svg2{
     min-height: 60vh;
     max-height: 85vh;
+  }
+  .news-section{
+    margin-top: 20px;
   }
   
 }

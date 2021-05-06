@@ -13,7 +13,7 @@
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <div class="col-12 text-center">
-            <div class="select" id-="state-select" (change)="stateDropdown($event)">
+            <div class="select" id="state-select" (change)="stateDropdown($event)">
               <select>
                 <option value="0" name="All States">All States</option>
                 <option value="AP" name="Andhra Pradesh">Andhra Pradesh</option>
@@ -261,11 +261,15 @@
           <div class="dis-section">
             <div class="dis">
               <div class="row text-center">
-                <div class="col-md-6 diswise-title">Day Wise Report</div>
+                <div class="col-md-6 diswise-title">District Wise Report</div>
                 <div class="col-md-6">
-                  <div class="select" id-="state-select">
-                    <select>
-                      <option *ngFor="let dis of districts">{{dis}}</option>
+                  <div class="select" id="dis-select">
+                    <select (change)="districtDropdown($event)" *ngIf="!disDisabled">
+                      <option *ngFor="let dis of districts" value="{{dis}}">{{dis}}</option>
+                      
+                    </select>
+                    <select disabled *ngIf="disDisabled">
+                      <option>No state selected!</option>
                       
                     </select>
                   </div>
@@ -276,13 +280,18 @@
                   <table>
                     <tbody>
                       <tr>
+                        <td class="text-center disTable-title">Total</td>
                         <td data-label="Confirmed">{{disConfirmed}}</td>
                         <td data-label="Recovered">{{disRecovered}}</td>
                         <td data-label="Deceased">{{disDeceased}}</td>
                         <td data-label="Vaccinated">{{disVaccinated}}</td>
                         <td data-label="Tested">{{disTested}}</td>
+                        <td class="text-center disTable-title">New Cases</td>
+                        <td data-label="Confirmed">{{disTConfirmed}}</td>
+                        <td data-label="Recovered">{{disTRecovered}}</td>
+                        <td data-label="Deceased">{{disTDeceased}}</td>
+                        
                       </tr>
-
                     </tbody>
                   </table>
                 </div>

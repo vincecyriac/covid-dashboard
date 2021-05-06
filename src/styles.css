@@ -43,6 +43,7 @@ body {
 
 
 .lastupdate {
+  margin-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -433,7 +434,7 @@ table td {
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-@media screen and (max-width: 1920px){
+@media screen and (max-width: 11920px){
   .day-wise table {
     border: 0;
   }

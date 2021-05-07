@@ -9,15 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StatesComponent } from './components/states/states.component';
-import { DistrictsComponent } from './components/districts/districts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WorldwideComponent } from './components/worldwide/worldwide.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     StatesComponent,
-    DistrictsComponent
+    WorldwideComponent,
   ],
   imports: [
     HttpClientModule,

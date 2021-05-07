@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DashboardService {
 
   IN_API_ENDPOINT:any="https://api.covid19india.org"
-  WD_API_ENDPOINT:any="https://disease.sh/v3/covid-19"
+  WD_API_ENDPOINT:any="https://disease.sh/v2"
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +32,9 @@ export class DashboardService {
   CountryData(): Observable<any>
   {
     return this.http.get(this.WD_API_ENDPOINT+"/countries");
+  }
+  ContinentData(): Observable<any>
+  {
+    return this.http.get(this.WD_API_ENDPOINT+"/continents");
   }
 }

@@ -758,32 +758,6 @@ export class StatesComponent implements OnInit {
       this.disTRecovered = "N/A";
       this.disTDeceased = "N/A";
     }
-
-    /* if (AllDisData[district].delta.confirmed) {
-      this.disTConfirmed = AllDisData[district].delta.confirmed;
-    }
-    else {
-      this.disTConfirmed = "N/A";
-    }
-
-    if (AllDisData[district].delta.deceased) {
-      this.disTDeceased = AllDisData[district].delta.deceased;
-    }
-    else {
-      this.disTDeceased = "N/A";
-    }
-
-    if (AllDisData[district].delta.recovered) {
-      this.disTRecovered = AllDisData[district].delta.recovered;
-    }
-    else {
-      this.disTRecovered = "N/A";
-    } */
-
-
-
-
-
   }
   districtDropdown(event) {
 

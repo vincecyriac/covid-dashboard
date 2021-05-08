@@ -1,4 +1,4 @@
-# CovidDashboard
+# COVITRACK
 
 ## Project details
 

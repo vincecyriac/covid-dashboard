@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { StatesComponent } from './components/states/states.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WorldwideComponent } from './components/worldwide/worldwide.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { WorldwideComponent } from './components/worldwide/worldwide.component';
     NavbarComponent,
     StatesComponent,
     WorldwideComponent,
+    AboutComponent,
   ],
   imports: [
     HttpClientModule,

@@ -687,7 +687,6 @@ export class StatesComponent implements OnInit {
 
   getDisData(state, district) {
     var AllDisData = this.fullIndia[state].districts;
-    console.log(AllDisData)
 
     if (AllDisData[district].total.confirmed) {
       this.disConfirmed = AllDisData[district].total.confirmed;
@@ -762,7 +761,6 @@ export class StatesComponent implements OnInit {
   districtDropdown(event) {
 
     var selectedDistrict = event.srcElement.value;
-    console.log(selectedDistrict)
     this.getDisData(this.currentStateId, selectedDistrict)
   }
 

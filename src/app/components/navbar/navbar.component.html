@@ -4,21 +4,22 @@
         <div class="col-xl-12">
           <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.html">
+              <img src="../../../favicon.ico" alt="">
               <span>Covitrak</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
               <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                <li class="nav-item" *ngIf="this.nav.routelinkr==2">
-                  <a class="nav-link" routerLink="/IN-States"> State Wise </a>
+              <ul class="navbar-nav" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <li class="nav-item" >
+                  <a class="nav-link"  [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"> <span> India</span> </a>
                 </li>
-                <li class="nav-item" *ngIf="this.nav.routelinkr==1">
-                  <a class="nav-link" routerLink="/WorldWide">World Wide</a>
+                <li class="nav-item" >
+                  <a class="nav-link" [routerLink]="['/WorldWide']"  [routerLinkActive]="['selection_active']"><span>World Wide</span></a>
                 </li>
-                <li class="nav-item">
-                  <a href="https://vincecyriac.live" target="_blank" class="nav-link">Contact Dev</a>
+                <li class="nav-item" >
+                  <a class="nav-link" [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a>
                 </li>
               </ul>
             </div>

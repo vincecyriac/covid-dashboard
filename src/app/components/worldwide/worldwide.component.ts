@@ -135,7 +135,7 @@ export class WorldwideComponent implements OnInit {
     data.forEach(element => {
       this.countries.push(element.country)
     });
-    if (this.CountryData != null || this.continentData != null) {
+    if (this.CountryData != null || this.continentData != null || this.cntntactive != "N/A") {
       this.loaded = false;
     }
   }
@@ -323,7 +323,6 @@ export class WorldwideComponent implements OnInit {
 
 
   getContinentData(){
-    console.log("continent called")
     this.DashSer.ContinentData().subscribe((Response) => {
       this.pushContinent(Response);
       this.continentData=Response;
@@ -337,8 +336,7 @@ export class WorldwideComponent implements OnInit {
     this.continents = [];
     data.forEach(element => {
       this.continents.push(element.continent)
-    });    
-    console.log(this.continents)
+    });
   }
 
   continentSelect(event){
@@ -346,10 +344,8 @@ export class WorldwideComponent implements OnInit {
   }
 
   individualContinent(continent){
-    console.log(continent)
     this.continentData.forEach(element => {
       if (element.continent == continent) {
-        console.log(continent)
         this.cntntactive = element.active;
         this.cntntcases = element.cases;
         this.cntntdeaths = element.deaths;

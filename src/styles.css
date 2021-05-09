@@ -762,7 +762,7 @@ table td {
   }
 }
 
-#about .ng-scroll-content {
+#about .ng-scroll-content { 
   display: block !important;
   min-width: 100%;
   position: relative!important;

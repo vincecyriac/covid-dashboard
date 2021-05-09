@@ -341,7 +341,7 @@ export class StatesComponent implements OnInit {
     this.currentStateId = state;
     this.TotalCases = this.fullIndia[state].total.confirmed;
     this.TotalDead = this.fullIndia[state].total.deceased;
-    this.TotalRecovered = this.fullIndia[state].total.confirmed;
+    this.TotalRecovered = this.fullIndia[state].total.recovered;
     this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
     if (this.fullIndia[state].total.other != null) {
       this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;
@@ -364,7 +364,7 @@ export class StatesComponent implements OnInit {
       this.currentStateId = state;
       this.TotalCases = this.fullIndia[state].total.confirmed;
       this.TotalDead = this.fullIndia[state].total.deceased;
-      this.TotalRecovered = this.fullIndia[state].total.confirmed;
+      this.TotalRecovered = this.fullIndia[state].total.recovered;
       this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
       if (this.fullIndia[state].total.other != null) {
         this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;

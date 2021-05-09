@@ -331,7 +331,7 @@ export class StatesComponent implements OnInit {
   }
 
 
-  /* ---------- MAP CLICK ------------------- */
+  /* ---------- MAP CLICK ------------------- -- */
   stateclick(event) {
     this.setMapGrey();
     document.getElementById(event.srcElement.attributes.id.value).style.fill = "#FF4600";

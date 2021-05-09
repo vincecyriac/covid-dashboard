@@ -7,7 +7,7 @@
     right: 0;
     z-index: 999;
     transition: all 0.3s ease-in;
-    background: #393e46;
+    background: var(--cone);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 

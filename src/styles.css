@@ -25,7 +25,6 @@ body {
 
 
 .gif {
-  background: url('./assets/loading.gif');
   height: 50px;
   width: 50px;
   background-size: cover;
@@ -849,6 +848,13 @@ table td {
     font-size: 15px;
   }
   .world-widget1 p {
+    font-size: 16px;
+  
+  }
+  .world-widget3 h5 {
+    font-size: 15px;
+  }
+  .world-widget3 p {
     font-size: 16px;
   
   }

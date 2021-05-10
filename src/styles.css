@@ -1,12 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* #393e46 */
+/* var(--cone) */
+:root {
+  --bg: #222831; /* var(--bg) */
+  --cone: #393e46; /* var(--cone) */
+  --ctwo: #2F3238; /* var(--ctwo) */
+  --white: white; /* var(--white) */
+}
 
 html,
 body {
   margin: 0;
   box-sizing: border-box;
-  background-color: #222831 !important;
+  background-color: var(--bg) !important;
   font-family: 'poppins';
 }
 
@@ -19,7 +25,6 @@ body {
 
 
 .gif {
-  background: url('./assets/loading.gif');
   height: 50px;
   width: 50px;
   background-size: cover;
@@ -153,7 +158,7 @@ body {
 }
 
 .world-widget {
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px 20px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -195,7 +200,7 @@ body {
 
 
 .dis {
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px 20px;
   border-radius: 5px;
 }
@@ -214,7 +219,7 @@ body {
 
 
 .news {
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px 20px;
   border-radius: 5px;
 }
@@ -254,7 +259,6 @@ body {
 }
 
 .news-time {
-  color: rgb(252, 252, 252, .5);
   font-size: 20px;
 }
 
@@ -264,7 +268,7 @@ body {
 
 .newsdata {
   color: rgb(252, 252, 252, .7);
-  background-color: #2f3238;
+  background-color: var(--ctwo);
   padding: 10px;
   margin: 10px;
   border-radius: 7px;
@@ -317,7 +321,7 @@ body {
   padding-right: 10px;
   height: 40px;
   outline: 0;
-  background-color: #393e46;
+  background-color: var(--cone);
   border-radius: 5px;
   border: 0;
   color: white;
@@ -332,13 +336,13 @@ body {
 
 
 .day-wise {
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px 20px;
   border-radius: 5px;
 }
 
 .day-wise .ngb-dp-header {
-  background-color: #2f3238;
+  background-color: var(--ctwo);
 }
 
 .day-wise .btn-light {
@@ -346,11 +350,11 @@ body {
 }
 
 .day-wise .ngb-dp-weekdays {
-  background-color: #2f3238;
+  background-color: var(--ctwo);
 }
 
 .day-wise .form-control {
-  background-color: #2f3238 !important;
+  background-color: var(--ctwo) !important;
   outline: 0 !important;
   box-shadow: none !important;
   border: 0 !important;
@@ -367,7 +371,7 @@ body {
 }
 
 .day-wise .dropdown-menu {
-  background-color: #2f3238 !important;
+  background-color: var(--ctwo) !important;
   color: white !important;
 }
 
@@ -378,7 +382,7 @@ body {
 /* background: #fff url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e) right .75rem center/8px 10px no-repeat; */
 
 .day-wise .custom-select {
-  background: #393e46;
+  background: var(--cone);
   box-shadow: none !important;
   border: 0 !important;
   color: #d1d1d1;
@@ -390,7 +394,7 @@ body {
 }
 
 .day-wise button {
-  background-color: #2f3238 !important;
+  background-color: var(--ctwo) !important;
   outline: 0 !important;
   box-shadow: none !important;
   border: 0 !important;
@@ -401,7 +405,7 @@ body {
 
 /* .datatable{
   margin: 20px 5% 10px 5%;;
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px;
   border-radius: 5px;
 
@@ -491,7 +495,7 @@ table td {
 
 /* diswise table */
 .dis select {
-  background-color: #2F3238 !important;
+  background-color: var(--ctwo) !important;
 
 }
 
@@ -643,7 +647,7 @@ table td {
 }
 
 .continent {
-  background-color: #393e46;
+  background-color: var(--cone);
   padding: 20px 20px;
   border-radius: 5px;
 }
@@ -660,7 +664,7 @@ table td {
 }
 
 .continent select {
-  background-color: #2F3238 !important;
+  background-color: var(--ctwo) !important;
 
 }
 
@@ -757,6 +761,12 @@ table td {
   }
 }
 
+#about .ng-scroll-content { 
+  display: block !important;
+  min-width: 100%;
+  position: relative!important;
+}
+
 .abt-content {
   margin-top: 30px;
   font-family: 'poppins';
@@ -780,7 +790,7 @@ table td {
   font-size: 24px;
 }
 .world-widget1 {
-  background-color: #2F3238;
+  background-color: var(--ctwo);
   padding: 15px 20px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -838,6 +848,13 @@ table td {
     font-size: 15px;
   }
   .world-widget1 p {
+    font-size: 16px;
+  
+  }
+  .world-widget3 h5 {
+    font-size: 15px;
+  }
+  .world-widget3 p {
     font-size: 16px;
   
   }

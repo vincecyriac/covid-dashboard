@@ -33,17 +33,25 @@
 <header class="header">
   <div class="header-inner">
     <div class="header-logo">
-      <!-- <a href="/"><img src="../../../favicon.ico" alt=""></a> -->
       <span>CoviTrack</span>
     </div>
     <div class="header-button js-menu" (click)="jsmenu($event)" id="jstoggle"> <i class="fa fa-bars"></i></div>
+    <div class="nav-menu">
+      <ul>
+        <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
+        <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+        <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
+        <!-- <li><a href="#about">About</a></li> -->
+      </ul>
+    </div>
   </div>
   <nav>
     <ul class="header-menu" id="jsmenu">
       <div class="menu-arrow"></div>
-      <li><a routerLink="/India">India</a></li>
-      <li><a routerLink="/WorldWide">World Wide</a></li>
-      <li><a routerLink="/About">About</a></li>
+      <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
+      <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+      <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
     </ul>
   </nav>
+  
 </header>

@@ -1,4 +1,4 @@
-  <div class="header">
+<!--   <div class="header">
     <div class="container-fluid">
       <div class="row">
         <div class="col-xl-12">
@@ -29,3 +29,29 @@
       </div>
     </div>
   </div>
+ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <span>CoviTrack</span>
+    </div>
+    <div class="header-button js-menu" (click)="jsmenu($event)" id="jstoggle"> <i class="fa fa-bars"></i></div>
+    <div class="nav-menu">
+      <ul>
+        <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
+        <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+        <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
+        <!-- <li><a href="#about">About</a></li> -->
+      </ul>
+    </div>
+  </div>
+  <nav>
+    <ul class="header-menu" id="jsmenu">
+      <div class="menu-arrow"></div>
+      <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
+      <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+      <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
+    </ul>
+  </nav>
+  
+</header>

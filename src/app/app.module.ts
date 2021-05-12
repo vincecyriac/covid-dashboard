@@ -12,6 +12,7 @@ import { StatesComponent } from './components/states/states.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WorldwideComponent } from './components/worldwide/worldwide.component';
 import { AboutComponent } from './components/about/about.component';
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import { AboutComponent } from './components/about/about.component';
     NgScrollbarModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NavbarModule,
+    WavesModule,
+    ButtonsModule
   ],
   providers: [
     {

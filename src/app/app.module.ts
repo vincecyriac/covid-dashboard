@@ -12,7 +12,8 @@ import { StatesComponent } from './components/states/states.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WorldwideComponent } from './components/worldwide/worldwide.component';
 import { AboutComponent } from './components/about/about.component';
-import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
+import { CowinComponent } from './components/cowin/cowin.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
     StatesComponent,
     WorldwideComponent,
     AboutComponent,
+    CowinComponent,
   ],
   imports: [
     HttpClientModule,

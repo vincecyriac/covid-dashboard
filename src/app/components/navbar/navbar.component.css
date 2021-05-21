@@ -202,7 +202,7 @@
 .nav-menu ul li a{
   font-family: 'poppins';
   letter-spacing: 1px;
-  color: rgb(180, 180, 180);
+  color: rgb(122, 122, 122);
   text-decoration: none !important;
   text-transform: uppercase;
   font-weight: 500;
@@ -213,7 +213,7 @@
 }
 
 .header-menu li a {
-  color: rgb(153, 153, 153);
+  color: rgb(122, 122, 122);
   letter-spacing: -0.02em;
   text-decoration: none !important;
   transition: color 0.2s ease-in-out;
@@ -239,5 +239,5 @@
 
 .selection_active span {
   color: white;
-  font-weight: 600;
+  /* font-weight: 600; */
 }

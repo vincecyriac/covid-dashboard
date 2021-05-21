@@ -1,0 +1,66 @@
+<div class="dashboard">
+  <ng-scrollbar id="cowin">
+    <section class="dash-section">
+      <div class="row">
+        <div class="col-12 cowin">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="contnt-section">
+                <div class="slot-check">
+                  <div class="row">
+                    <div class=" col-12 slot-check-title text-center">CoWin Portal</div>
+                  </div>
+
+                  <div class="row text-center search-tab justify-content-center">
+                    <ul class="nav justify-content-center" id="myTab" role="tablist">
+                      <li class="nav-item col-6">
+                        <a class="nav-link active" id="dist-tab" data-toggle="tab" href="#dist" role="tab"
+                          aria-controls="dist" aria-selected="false">By District</a>
+                      </li>
+                      <li class="nav-item col-6">
+                        <a class="nav-link" id="st-tab" data-toggle="tab" href="#st" role="tab" aria-controls="st"
+                          aria-selected="false">By Pin</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="dist" role="tabpanel" aria-labelledby="dist-tab">
+                      <div class="row">
+                        <div class="col-6 text-center st-sel">
+                          <div class="select" id="st-select">
+                            <select (change)="stSelect($event)">
+                              <option value="0" hidden>State</option>
+                              <option *ngFor="let st of states" value="{{st.state_id}}">{{st.state_name}}</option>
+                            </select>
+                          </div>                          
+                        </div>
+                        <div class="col-6 text-center dt-sel">
+                          <div class="select" id="dt-select">
+                            <select [disabled]="!districts" (change)="dtSelect($event)">
+                              <option value="0" hidden>District</option>
+                              <option *ngFor="let dt of districts" value="{{dt.district_id}}">{{dt.district_name}}</option>
+                            </select>
+                          </div>  
+                        </div>
+                      </div>
+                      <!-- <div class="row justify-content-center">
+                        <div class="col-6">
+                          <button type="submit" class="btn btn-primary" >Search</button>
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="tab-pane fade" id="st" role="tabpanel" aria-labelledby="st-tab">
+                      Search by pin
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-6 col-sm-6"></div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-scrollbar>
+</div>

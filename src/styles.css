@@ -1050,52 +1050,60 @@ table td {
   border-radius: 5px;
 }
 
-.cowin{
+.cowin {
   margin-top: 20px;
 }
-.slot-check-title{
+
+.slot-check-title {
   font-size: 25px;
   font-family: 'poppins';
 }
-.slot-check-tagline{
+
+.slot-check-tagline {
   font-size: 15px;
   font-family: 'poppins';
 }
-.search-tab{
+
+.search-tab {
   margin-top: 20px;
   padding: 0px 10px;
 }
-.search-tab .nav{
+
+.search-tab .nav {
   width: 100% !important;
 }
-.search-tab .nav .nav-item{
+
+.search-tab .nav .nav-item {
   border: 1px solid rgb(126, 126, 126);
   width: 100% !important;
 }
-.search-tab .nav .nav-item a{
+
+.search-tab .nav .nav-item a {
   color: rgb(160, 160, 160);
 }
 
 
-.search-tab .nav .nav-item:first-child{
+.search-tab .nav .nav-item:first-child {
   padding: 0px;
   border-right: none;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-.search-tab .nav .nav-item:last-child{
+
+.search-tab .nav .nav-item:last-child {
   padding: 0px;
   border-left: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.search-tab .nav .nav-item .active{
+
+.search-tab .nav .nav-item .active {
   background-color: var(--cone);
   border-radius: 10px;
   color: white;
 }
 
-.tab-pane .btn-primary{
+.tab-pane .btn-primary {
   width: 100%;
   background-color: var(--bg) !important;
   outline: white !important;
@@ -1103,7 +1111,8 @@ table td {
   border-radius: 15px;
   box-shadow: none !important;
 }
-.tab-pane .btn-primary:hover{
+
+.tab-pane .btn-primary:hover {
   width: 100%;
   background-color: var(--cone) !important;
   outline: none !important;
@@ -1112,18 +1121,185 @@ table td {
   box-shadow: none !important;
 }
 
-.tab-pane{
-  padding: 10px 10px 10px 10px;
+.tab-pane {
+  padding: 10px;
   width: 100%;
+  height: 85px;
 }
-.st-sel{
+
+.st-sel {
   padding: 10px 5px 10px 0px !important;
 }
 
 
-.dt-sel{
+.dt-sel {
   padding: 10px 5px 10px 0px !important;
 }
-.search{
+
+.search {
   width: 100%;
+}
+
+
+/* .search-results .results{
+  height: 200px;
+  width: 200px;
+} */
+.search-results .ng-scrollbar {
+  min-height: 500px;
+  width: 100%;
+}
+
+.card {
+  border: none !important;
+  background-color: var(--cone) !important;
+  margin-bottom: 10px;
+  border-radius: 10px !important;
+}
+
+.card-header {
+  background-color: transparent !important;
+  border: none !important;
+  color: white;
+  text-align: left;
+}
+
+.card-body {
+  background-color: transparent;
+  border-top: .5px solid rgb(99, 99, 99);
+}
+
+.card-body .data-head {
+  display: flex;
+  padding-right: 0 !important;
+  color: rgb(204, 204, 204);
+  /* justify-content: flex-end; */
+}
+
+.acc-title-name {
+  font-size: 14px !important;
+}
+
+.card-body .center-name {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.card-body .center-addr {
+  color: rgb(204, 204, 204);
+}
+
+.card-body .center-info {
+  padding: 2px;
+}
+
+.vacc-sessions .day-table {
+  margin-top: 20px;
+}
+
+.vacc-sessions table {
+  width: 100%;
+}
+
+
+.vacc-sessions table tr {
+  background-color: transparent;
+  border: 1px solid rgb(119, 119, 119);
+  padding: .35em;
+}
+
+.vacc-sessions thead th {
+  color: #FCFCFCB3;
+}
+
+.vacc-sessions table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.vacc-sessions table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 11920px) {
+  .vacc-sessions table {
+    border: 0;
+  }
+
+  .vacc-sessions table caption {
+    font-size: 1.3em;
+  }
+
+  .vacc-sessions table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .vacc-sessions table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .vacc-sessions table td {
+    border-bottom: 1px solid rgb(119, 119, 119) !important;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+
+  .vacc-sessions table td:last-child {
+    border-bottom: none !important;
+  }
+
+  .vacc-sessions table td::before {
+    content: attr(data-label);
+    float: left;
+    color: rgb(170, 170, 170);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.slot-title {
+  padding: 5px;
+}
+
+.badge {
+  margin-left: 5px !important;
+  padding: 5px 8px !important;
+  border-radius: 15px !important;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.welcome-info {
+  min-height: 200px;
+  font-family: 'Poppins';
+  justify-content: center;
+}
+.vacc-gif{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vacc-gif img {
+  max-height: 100px;
+
 }

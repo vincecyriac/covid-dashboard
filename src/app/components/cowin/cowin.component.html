@@ -3,7 +3,7 @@
     <section class="dash-section">
       <div class="row">
         <div class="col-12 cowin">
-          <div class="row">
+          <div class="row justify-content-center">
             <div class="col-md-6 col-sm-12">
               <div class="contnt-section">
                 <div class="slot-check">
@@ -32,15 +32,16 @@
                               <option value="0" hidden>State</option>
                               <option *ngFor="let st of states" value="{{st.state_id}}">{{st.state_name}}</option>
                             </select>
-                          </div>                          
+                          </div>
                         </div>
                         <div class="col-6 text-center dt-sel">
                           <div class="select" id="dt-select">
                             <select [disabled]="!districts" (change)="dtSelect($event)">
                               <option value="0" hidden>District</option>
-                              <option *ngFor="let dt of districts" value="{{dt.district_id}}">{{dt.district_name}}</option>
+                              <option *ngFor="let dt of districts" value="{{dt.district_id}}">{{dt.district_name}}
+                              </option>
                             </select>
-                          </div>  
+                          </div>
                         </div>
                       </div>
                       <!-- <div class="row justify-content-center">
@@ -50,7 +51,82 @@
                       </div> -->
                     </div>
                     <div class="tab-pane fade" id="st" role="tabpanel" aria-labelledby="st-tab">
-                      Search by pin
+                      feature not yet available
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 welcome-info" *ngIf="welcomeinfo">
+                      <div class="row vacc-gif">
+                        <img src="../../../assets/vacc.gif" alt="">
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center">
+                          Please select a district or enter a pin to check slot availability!
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 not-found" *ngIf="centerCount==0 && !welcomeinfo">
+                      <div class="row vacc-gif">
+                        <img src="../../../assets/search.gif" alt="">
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center">
+                          No vaccination centers available for this location at the moment!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row search-results">
+                    <div class="col-12">
+                      <div id="accordion" *ngIf="centerCount!=0">
+                        
+                        <div class="card" *ngFor="let cntr of centers;let i = index" >
+                          <button (click)="findSessions(cntr.center_id)" class="card-header" id="headingTwo{{i}}" data-toggle="collapse" attr.data-target="#collapseTwo{{i}}" aria-expanded="false" attr.aria-controls="collapseTwo{{i}}">
+                            <h6 class="mb-0 row"> 
+                                <div class="col-12 acc-title-name">
+                                  <!-- <i class="fa fa-arrow-down mr-2" aria-hidden="true"></i> -->
+                                  {{cntr.name}} 
+                                  <div class="badge green float-right" *ngIf="availability(cntr.center_id)!=0">{{availability(cntr.center_id)}}</div>
+                                  <div class="badge red float-right" *ngIf="availability(cntr.center_id)==0">0</div>
+                                </div>
+                              </h6>
+                            </button>
+                          <div id="collapseTwo{{i}}" class="collapse" attr.aria-labelledby="headingTwo{{i}}" data-parent="#accordion">
+                            <div class="card-body">
+                              <div class="row center-info">
+                                <div class="col-12 text-center center-name">
+                                  {{cntr.name}}
+                                </div>
+                              </div>
+                              <div class="row center-info">
+                                <div class="col-12 text-center center-addr">
+                                  {{cntr.address}}, PIN: {{cntr.pincode}}
+                                </div>
+                              </div>
+                              <div *ngFor="let sns of sessions; let j = index" class="vacc-sessions">
+                                <div class="row day-table">
+                                  <div class="col-12">
+                                    <table>
+                                      <tbody>
+                                        <tr>
+                                          <td data-label="Date">{{sns.date}}</td>
+                                          <td data-label="Vaccine">{{sns.vaccine}}</td>
+                                          <td data-label="Slots">{{sns.available_capacity}}</td>
+                                          <td data-label="Dose 1">{{sns.available_capacity_dose1}}</td>
+                                          <td data-label="Dose 2">{{sns.available_capacity_dose2}}</td>
+                                          <td data-label="Age Group">{{findAgeGroup(sns.min_age_limit)}}</td>
+                                          <td data-label="Fee type">{{cntr.fee_type}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                             </div>
+                          </div>
+                        </div>
+                        
+                      </div>
                     </div>
                   </div>
 

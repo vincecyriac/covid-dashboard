@@ -127,9 +127,9 @@
   font-family: 'Poppins';
 }
 
-.header-logo a img {
+.header-logo img {
   display: block;
-  height: 40px;
+  height: 35px;
   transition: opacity 0.2s;
 }
 

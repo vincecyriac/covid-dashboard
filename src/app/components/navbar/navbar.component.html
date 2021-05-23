@@ -1,47 +1,15 @@
-<!--   <div class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-12">
-          <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.html">
-              <img src="../../../favicon.ico" alt="">
-              <span>Covitrack</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav" data-toggle="collapse" data-target="#navbarSupportedContent">
-                <li class="nav-item" >
-                  <a class="nav-link"  [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"> <span> India</span> </a>
-                </li>
-                <li class="nav-item" >
-                  <a class="nav-link" [routerLink]="['/WorldWide']"  [routerLinkActive]="['selection_active']"><span>World Wide</span></a>
-                </li>
-                <li class="nav-item" >
-                  <a class="nav-link" [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a>
-                </li>
-              </ul>
-            </div>
-
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
- -->
 <header class="header">
   <div class="header-inner">
     <div class="header-logo">
-      <span>CoviTrack</span>
+      <a href="/"><img src="../../../assets/logo.png" alt="CoviTrack"></a>
     </div>
     <div class="header-button js-menu" (click)="jsmenu($event)" id="jstoggle"> <i class="fa fa-bars"></i></div>
     <div class="nav-menu">
       <ul>
         <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
         <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+        <li><a [routerLink]="['/Cowin']"  [routerLinkActive]="['selection_active']"><span>Cowin</span></a></li>
         <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
-        <!-- <li><a href="#about">About</a></li> -->
       </ul>
     </div>
   </div>
@@ -50,6 +18,7 @@
       <div class="menu-arrow"></div>
       <li><a [routerLink]="['/India']"  [routerLinkActive]="['selection_active']"><span>India</span></a></li>
       <li><a [routerLink]="['/WorldWide']" [routerLinkActive]="['selection_active']"><span>World Wide</span></a></li>
+      <li><a [routerLink]="['/Cowin']"  [routerLinkActive]="['selection_active']"><span>Cowin</span></a></li>
       <li><a [routerLink]="['/About']"  [routerLinkActive]="['selection_active']"><span>About</span></a></li>
     </ul>
   </nav>

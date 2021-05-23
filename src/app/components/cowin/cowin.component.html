@@ -1,3 +1,10 @@
+<div class="spinner" *ngIf="loaded==true">
+  <div class="loader loader-7">
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
+  </div>
+</div>
 <div class="dashboard">
   <ng-scrollbar id="cowin">
     <section class="dash-section">
@@ -14,44 +21,52 @@
                   <div class="row text-center search-tab justify-content-center">
                     <ul class="nav justify-content-center" id="myTab" role="tablist">
                       <li class="nav-item col-6">
-                        <a class="nav-link active" id="dist-tab" data-toggle="tab" href="#dist" role="tab"
-                          aria-controls="dist" aria-selected="false">By District</a>
+                        <a (click)="ByDisClick()" class="nav-link active" id="dist-tab" data-toggle="tab" href="#dist" role="tab" aria-controls="dist" aria-selected="false">By District</a>
                       </li>
                       <li class="nav-item col-6">
-                        <a class="nav-link" id="st-tab" data-toggle="tab" href="#st" role="tab" aria-controls="st"
-                          aria-selected="false">By Pin</a>
+                        <a (click)="ByPinClick()" class="nav-link" id="st-tab" data-toggle="tab" href="#st" role="tab" aria-controls="st" aria-selected="false">By Pin</a>
                       </li>
                     </ul>
                   </div>
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show" id="dist" role="tabpanel" aria-labelledby="dist-tab">
-                      <div class="row">
-                        <div class="col-6 text-center st-sel">
-                          <div class="select" id="st-select">
-                            <select (change)="stSelect($event)">
-                              <option value="0" hidden>State</option>
-                              <option *ngFor="let st of states" value="{{st.state_id}}">{{st.state_name}}</option>
-                            </select>
+                      <form [formGroup]="byDis">
+                        <div class="row">
+                          <div class="col-6 text-center st-sel">
+                            <div class="select" id="st-select">
+                              <select (change)="stSelect($event)" formControlName="state">
+                                <option value="0" hidden>State</option>
+                                <option *ngFor="let st of states" value="{{st.state_id}}">{{st.state_name}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-6 text-center dt-sel">
+                            <div class="select" id="dt-select">
+                              <select (change)="dtSelect($event)" formControlName="dist">
+                                <option value="0" hidden>District</option>
+                                <option *ngFor="let dt of districts" value="{{dt.district_id}}">{{dt.district_name}}
+                                </option>
+                              </select>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-6 text-center dt-sel">
-                          <div class="select" id="dt-select">
-                            <select [disabled]="!districts" (change)="dtSelect($event)">
-                              <option value="0" hidden>District</option>
-                              <option *ngFor="let dt of districts" value="{{dt.district_id}}">{{dt.district_name}}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- <div class="row justify-content-center">
-                        <div class="col-6">
-                          <button type="submit" class="btn btn-primary" >Search</button>
-                        </div>
-                      </div> -->
+                      </form>
                     </div>
-                    <div class="tab-pane fade" id="st" role="tabpanel" aria-labelledby="st-tab">
-                      feature not yet available
+                    <div class="tab-pane fade search-pin" id="st" role="tabpanel" aria-labelledby="st-tab">
+                      <form [formGroup]="byPin" #myform="ngForm" (ngSubmit)="getSlotdatabyPin(myform)">
+                        <div class="row">
+                          <div class="col-6 pin-code">
+                            <input type="text" formControlName="pin" placeholder="Pincode" class="form-control">
+                           
+                          </div>
+                          <div class="col-6">
+                            <button type="submit" class="btn btn-primary text-center">Search</button>
+                          </div>
+                          <div class="text-danger pl-2" *ngIf="byPin.controls['pin'].invalid && (byPin.controls['pin'].touched || submitted)">
+                            Invalid PIN
+                          </div>
+                        </div>
+                      </form>
                     </div>
                   </div>
                   <div class="row">
@@ -76,15 +91,17 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row search-results">
+                  <div class="row search-results" *ngIf="centerCount!=0">
+                    <div class="col-12 ml-2 mb-2">
+                      Available centers: {{centerCount}}
+                    </div>
                     <div class="col-12">
-                      <div id="accordion" *ngIf="centerCount!=0">
+                      <div id="accordion">
                         
                         <div class="card" *ngFor="let cntr of centers;let i = index" >
                           <button (click)="findSessions(cntr.center_id)" class="card-header" id="headingTwo{{i}}" data-toggle="collapse" attr.data-target="#collapseTwo{{i}}" aria-expanded="false" attr.aria-controls="collapseTwo{{i}}">
                             <h6 class="mb-0 row"> 
                                 <div class="col-12 acc-title-name">
-                                  <!-- <i class="fa fa-arrow-down mr-2" aria-hidden="true"></i> -->
                                   {{cntr.name}} 
                                   <div class="badge green float-right" *ngIf="availability(cntr.center_id)!=0">{{availability(cntr.center_id)}}</div>
                                   <div class="badge red float-right" *ngIf="availability(cntr.center_id)==0">0</div>
@@ -133,7 +150,44 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-6 col-sm-6"></div> -->
+            <!-- <div class="col-md-6 col-sm-6 cowin-dashboard">
+              <div class="row">
+                <div class="col-12 text-center slot-check-title">
+                  &nbsp;
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="world-widget">
+                    <div class="icon gradient-13">
+                      <i class="fa fa-map"></i>
+                    </div>
+                    <div>
+                      <h5>State</h5>
+                      <h2 id="total_cases">www</h2>
+                    </div>
+                  </div>
+                  <div class="world-widget">
+                    <div class="icon gradient-13">
+                      <i class="fa fa-map"></i>
+                    </div>
+                    <div>
+                      <h5>State</h5>
+                      <h2 id="total_cases">www</h2>
+                    </div>
+                  </div>
+                  <div class="world-widget">
+                    <div class="icon gradient-13">
+                      <i class="fa fa-map"></i>
+                    </div>
+                    <div>
+                      <h5>State</h5>
+                      <h2 id="total_cases">www</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>

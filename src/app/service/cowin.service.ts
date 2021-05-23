@@ -21,4 +21,8 @@ export class CowinService {
   {
     return this.http.get(this.IN_API_ENDPOINT+"v2/appointment/sessions/public/calendarByDistrict?district_id="+id+"&date="+date);
   } 
+  slotByPin(pin,date): Observable<any>
+  {
+    return this.http.get(this.IN_API_ENDPOINT+"v2/appointment/sessions/public/calendarByPin?pincode="+pin+"&date="+date);
+  }
 }

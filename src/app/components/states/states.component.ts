@@ -469,7 +469,7 @@ export class StatesComponent implements OnInit {
       case "PY": return (26);
       case "RJ": return (27);
       case "SK": return (28);
-      case "TG": return (27);
+      case "TG": return (29);
       case "TN": return (30);
       case "TR": return (31);
       case "UP": return (32);

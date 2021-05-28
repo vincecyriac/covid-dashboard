@@ -1321,3 +1321,9 @@ table td {
   border-radius: 15px;
   box-shadow: none !important;
 }
+.loc-issue{
+  color: white;
+  font-family: 'Poppins';
+  padding: 20px;
+  text-align: center;
+}

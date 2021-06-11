@@ -186,7 +186,7 @@ export class StatesComponent implements OnInit {
     }
 
 
-    this.TotalVaccinated = data["TT"].total.vaccinated
+    this.TotalVaccinated = data["TT"].total.vaccinated2
     this.TotalCases = data["TT"].total.confirmed
     this.TotalDead = data["TT"].total.deceased
     this.TotalRecovered = data["TT"].total.recovered
@@ -342,7 +342,7 @@ export class StatesComponent implements OnInit {
     this.TotalCases = this.fullIndia[state].total.confirmed;
     this.TotalDead = this.fullIndia[state].total.deceased;
     this.TotalRecovered = this.fullIndia[state].total.recovered;
-    this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
+    this.TotalVaccinated = this.fullIndia[state].total.vaccinated2;
     if (this.fullIndia[state].total.other != null) {
       this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;
     }
@@ -365,7 +365,7 @@ export class StatesComponent implements OnInit {
       this.TotalCases = this.fullIndia[state].total.confirmed;
       this.TotalDead = this.fullIndia[state].total.deceased;
       this.TotalRecovered = this.fullIndia[state].total.recovered;
-      this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
+      this.TotalVaccinated = this.fullIndia[state].total.vaccinated2;
       if (this.fullIndia[state].total.other != null) {
         this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;
       }
@@ -491,8 +491,8 @@ export class StatesComponent implements OnInit {
   getIndiaToday() {
 
     if (this.fullIndia["TT"].delta) {
-      if (this.fullIndia["TT"].delta.vaccinated) {
-        this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated
+      if (this.fullIndia["TT"].delta.vaccinated2) {
+        this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated2
       }
       else {
         this.dayVaccinated = "N/A"
@@ -558,8 +558,8 @@ export class StatesComponent implements OnInit {
       var TTFul = this.IndiaDaywise["TT"].dates;
       if (TTFul[date]) {
         if (TTFul[date].delta) {
-          if (TTFul[date].delta.vaccinated) {
-            this.dayVaccinated = TTFul[date].delta.vaccinated
+          if (TTFul[date].delta.vaccinated2) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
             this.dayVaccinated = "N/A"
@@ -615,8 +615,8 @@ export class StatesComponent implements OnInit {
 
       if (TTFul[date]) {
         if (TTFul[date].delta) {
-          if (TTFul[date].delta.vaccinated) {
-            this.dayVaccinated = TTFul[date].delta.vaccinated
+          if (TTFul[date].delta.vaccinated2) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
             this.dayVaccinated = "N/A"
@@ -722,8 +722,8 @@ export class StatesComponent implements OnInit {
     else {
       this.disTested = "N/A";
     }
-    if (AllDisData[district].total.vaccinated) {
-      this.disVaccinated = AllDisData[district].total.vaccinated;
+    if (AllDisData[district].total.vaccinated2) {
+      this.disVaccinated = AllDisData[district].total.vaccinated2;
     }
     else {
       this.disVaccinated = "N/A";

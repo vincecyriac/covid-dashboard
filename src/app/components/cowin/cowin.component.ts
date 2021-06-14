@@ -105,7 +105,7 @@ export class CowinComponent implements OnInit {
     });
   }
 
-  findAgeGroup(age){
+  /* findAgeGroup(age){
     if(age>=45){
       return("45+")
     }
@@ -115,7 +115,7 @@ export class CowinComponent implements OnInit {
     else{
       return("0-18")
     }
-  }
+  } */
   availability(id){
     var ssns=[];
     var count:number=0;

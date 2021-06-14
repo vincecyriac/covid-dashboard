@@ -96,9 +96,9 @@
                     </div>
                   </div>
                   <div class="row search-results" *ngIf="centerCount!=0">
-                    <div class="col-12 ml-2 mb-2">
+                    <!-- <div class="col-12 ml-2 mb-2">
                       Available centers: {{centerCount}}
-                    </div>
+                    </div> -->
                     <div class="col-12">
                       <div id="accordion">
                         
@@ -135,7 +135,8 @@
                                           <td data-label="Slots">{{sns.available_capacity}}</td>
                                           <td data-label="Dose 1">{{sns.available_capacity_dose1}}</td>
                                           <td data-label="Dose 2">{{sns.available_capacity_dose2}}</td>
-                                          <td data-label="Age Group">{{findAgeGroup(sns.min_age_limit)}}</td>
+                                          <!-- <td data-label="Age Group">{{findAgeGroup(sns.min_age_limit)}}</td> -->
+                                          <td data-label="Age Group">{{sns.min_age_limit}}+</td>
                                           <td data-label="Fee type">{{cntr.fee_type}}</td>
                                         </tr>
                                       </tbody>

@@ -1327,3 +1327,11 @@ table td {
   padding: 20px;
   text-align: center;
 }
+.data-charts{
+  padding: 0px 15px;
+  margin-bottom: 20px;
+}
+.data-charts .charts{
+  margin-top: 20px;
+  padding: 0 15px;
+}

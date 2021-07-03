@@ -853,7 +853,6 @@ export class StatesComponent implements OnInit {
   getLinechartLabel(today) {
     this.lineChartLabels = []
     var tempDateArr: any = []
-    console.log("today - " + today)
     const fDateArr = today.split('-');
     var fyear: number = parseInt(fDateArr[0]);
     var fmonth: number = parseInt(fDateArr[1]);
@@ -874,8 +873,7 @@ export class StatesComponent implements OnInit {
         }
         prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + fday).slice(-2)
         tempDateArr.push(prevday)
-        console.log(prevday)
-        for (let j = 1; j <= i; j++) {
+        for (let j = 1; j <= 10-i; j++) {
           prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + (fday - j)).slice(-2)
           tempDateArr.push(prevday)
         }
@@ -885,13 +883,10 @@ export class StatesComponent implements OnInit {
         prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + (fday - i)).slice(-2)
         tempDateArr.push(prevday)
       }
-
     }
     this.lineChartLabels = tempDateArr.reverse();
-    console.log(this.lineChartLabels)
   }
   setChartData(state) {
-    console.log(this.confirmesData)
     this.confirmesData = []
     this.recoveredData = []
     this.vaccine1data = []
@@ -899,6 +894,7 @@ export class StatesComponent implements OnInit {
     this.deathData = []
     var dayData: any;
     var StateData = this.IndiaDaywise[state].dates
+    
 
     for (let i = 0; i < 10; i++) {
       dayData = StateData[this.lineChartLabels[i]]

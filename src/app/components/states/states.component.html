@@ -338,15 +338,24 @@
         </div>
       </div>
       <div class="row data-charts">
-        <div class="col-md-6 col-sm-12 charts">
-          <div style="display: block">
+
+        <!-- <div class="col-md-12 col-sm-12 charts" >
+          <div style="display: block" class="chart-canvas">
+            <canvas baseChart height="350" [datasets]="alineChartData" [labels]="alineChartLabels" [options]="lineChartOptions"
+              [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="clineChartColors">
+            </canvas>
+          </div>
+        </div> -->
+
+        <div class="col-md-6 col-sm-12 charts" >
+          <div style="display: block" class="chart-canvas">
             <canvas baseChart height="350" [datasets]="clineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
               [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="clineChartColors">
             </canvas>
           </div>
         </div>
         <div class="col-md-6 col-sm-12 charts">
-          <div style="display: block">
+          <div style="display: block" class="chart-canvas">
             <canvas baseChart height="350" [datasets]="rlineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
               [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="rlineChartColors">
             </canvas>
@@ -355,14 +364,14 @@
       </div>
       <div class="row data-charts">
         <div class="col-md-6 col-sm-12 charts">
-          <div style="display: block">
+          <div style="display: block" class="chart-canvas">
             <canvas baseChart height="350" [datasets]="dlineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
               [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="dlineChartColors">
             </canvas>
           </div>
         </div>
         <div class="col-md-6 col-sm-12 charts">
-          <div style="display: block">
+          <div style="display: block" class="chart-canvas">
             <canvas baseChart height="350" [datasets]="vlineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
               [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="vlineChartColors">
             </canvas>

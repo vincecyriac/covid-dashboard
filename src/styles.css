@@ -1329,9 +1329,70 @@ table td {
 }
 .data-charts{
   padding: 0px 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .data-charts .charts{
   margin-top: 20px;
-  padding: 0 15px;
+  padding: 0px 15px;
+}
+.data-charts .charts .chart-canvas{
+  background-color: var(--cone);
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+
+.search-results .ngb-dp-header {
+  background-color: var(--cone);
+}
+
+.search-results .btn-light {
+  color: rgb(182, 182, 182)
+}
+
+.search-results .ngb-dp-weekdays {
+  background-color: var(--cone);
+}
+
+.search-results .form-control {
+  background-color: var(--cone) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  height: 44px;
+  cursor: pointer;
+  color: rgb(224, 224, 224) !important;
+}
+.search-results .dropdown-menu {
+  background-color: var(--cone) !important;
+  color: white !important;
+}
+
+.search-results .ngb-dp-weekday {
+  color: #dddddd !important;
+}
+.search-results .custom-select {
+  background: var(--ctwo);
+  box-shadow: none !important;
+  border: 0 !important;
+  color: #d1d1d1;
+  margin-right: 5px;
+  text-align-last: center;
+}
+
+.search-results .btn-light:hover {
+  color: rgb(0, 0, 0)
+}
+
+.search-results .input-group-append button {
+  background-color: var(--cone) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+.search-results .datepicker{
+  margin-bottom: 20px;
+}
+#accordion .fa{
+  font-size: 20px;
 }

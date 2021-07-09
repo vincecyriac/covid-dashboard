@@ -54,6 +54,7 @@ export class StatesComponent implements OnInit {
   deathData: any = [];
   vaccine1data: any = [];
   vaccine2data: any = [];
+  highstConfirmed:any=0;
 
 
 
@@ -78,6 +79,9 @@ export class StatesComponent implements OnInit {
   public lineChartLabels = [];
   public lineChartType = 'line';
   public lineChartLegend = true;
+
+  public alineChartData = [];
+  public alineChartLabels = [];
 
 
   public clineChartData = []
@@ -164,7 +168,6 @@ export class StatesComponent implements OnInit {
   DatePicker = new FormGroup({
     date: new FormControl()
   });
-
 
   timestampConvert(timestamp) {
     let unix_timestamp = timestamp
@@ -291,6 +294,11 @@ export class StatesComponent implements OnInit {
   }
 
   setMapColor(data) {
+    for (let index = 0; index < 37; index++) {
+      if(this.statewise[index].active > this.highstConfirmed){
+        this.highstConfirmed = this.statewise[index].active
+      }
+    }
     document.getElementById("AP").style.fill = this.setFill(this.statewise[1].active)
     document.getElementById("AR").style.fill = this.setFill(this.statewise[2].active)
     document.getElementById("AS").style.fill = this.setFill(this.statewise[3].active)
@@ -365,31 +373,31 @@ export class StatesComponent implements OnInit {
   }
 
   setFill(total) {
-    if (total >= (500000)) {
+    if (total >= (this.highstConfirmed*0.90)) {
       return ("#FF0000")
     }
-    else if (total >= (400000)) {
+    else if (total >= this.highstConfirmed*0.80) {
       return ("#FF2300")
     }
-    else if (total >= 300000) {
+    else if (total >= this.highstConfirmed*0.70) {
       return ("#FF4600")
     }
-    else if (total >= 200000) {
+    else if (total >= this.highstConfirmed*0.60) {
       return ("#FF6900")
     }
-    else if (total >= 100000) {
+    else if (total >= this.highstConfirmed*0.50) {
       return ("#FF8C00")
     }
-    else if (total >= 50000) {
+    else if (total >= this.highstConfirmed*0.40) {
       return ("#FFAF00")
     }
-    else if (total >= 30000) {
+    else if (total >= this.highstConfirmed*0.30) {
       return ("#FFD300")
     }
-    else if (total >= 10000) {
+    else if (total >= this.highstConfirmed*0.20) {
       return ("#FFF600")
     }
-    else if (total >= 5000) {
+    else if (total >= this.highstConfirmed*0.10) {
       return ("#D4FF00")
     }
     else {
@@ -621,12 +629,14 @@ export class StatesComponent implements OnInit {
 
 
   }
+
   IndiaTimeseries() {
 
     this.DashSer.Timeseries().subscribe((Response) => {
       this.IndiaDaywise = Response;
       this.GetDaywise(this.today, "0")
       this.setChartData("TT");
+      this.getAllData("TT")
       if (this.IndiaDaywise != null || this.fullIndia != null) {
         this.loaded = false;
       }
@@ -873,7 +883,7 @@ export class StatesComponent implements OnInit {
         }
         prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + fday).slice(-2)
         tempDateArr.push(prevday)
-        for (let j = 1; j <= 10-i; j++) {
+        for (let j = 1; j <= 10 - i; j++) {
           prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + (fday - j)).slice(-2)
           tempDateArr.push(prevday)
         }
@@ -894,7 +904,7 @@ export class StatesComponent implements OnInit {
     this.deathData = []
     var dayData: any;
     var StateData = this.IndiaDaywise[state].dates
-    
+
 
     for (let i = 0; i < 10; i++) {
       dayData = StateData[this.lineChartLabels[i]]
@@ -906,21 +916,32 @@ export class StatesComponent implements OnInit {
     }
 
     this.clineChartData = [
-      { data: [this.confirmesData[0], this.confirmesData[1], this.confirmesData[2], this.confirmesData[3], this.confirmesData[4], this.confirmesData[5], this.confirmesData[6], this.confirmesData[7], this.confirmesData[5], this.confirmesData[9]], label: 'Confirmed' }
+      { data: this.confirmesData, label: 'Confirmed' }
     ];
     this.rlineChartData = [
-      { data: [this.recoveredData[0], this.recoveredData[1], this.recoveredData[2], this.recoveredData[3], this.recoveredData[4], this.recoveredData[5], this.recoveredData[6], this.recoveredData[7], this.recoveredData[5], this.recoveredData[9]], label: 'Recovered' }
+      { data: this.recoveredData, label: 'Recovered' }
     ];
     this.dlineChartData = [
-      { data: [this.deathData[0], this.deathData[1], this.deathData[2], this.deathData[3], this.deathData[4], this.deathData[5], this.deathData[6], this.deathData[7], this.deathData[5], this.deathData[9]], label: 'Deceased' }
+      { data: this.deathData, label: 'Deceased' }
     ];
     this.vlineChartData = [
-      { data: [this.vaccine1data[0], this.vaccine1data[1], this.vaccine1data[2], this.vaccine1data[3], this.vaccine1data[4], this.vaccine1data[5], this.vaccine1data[6], this.vaccine1data[7], this.vaccine1data[5], this.vaccine1data[9]], label: 'Dose 1' },
-      { data: [this.vaccine2data[0], this.vaccine2data[1], this.vaccine2data[2], this.vaccine2data[3], this.vaccine2data[4], this.vaccine2data[5], this.vaccine2data[6], this.vaccine2data[7], this.vaccine2data[5], this.vaccine2data[9]], label: 'Dose 2' }
+      { data: this.vaccine1data, label: 'Dose 1' },
+      { data: this.vaccine2data, label: 'Dose 2' }
     ];
   }
-
-
+  getAllData(state) {
+    var dateData = this.IndiaDaywise[state].dates
+    var confirmed: any = [];
+    var dates: any = [];
+    for (let key in dateData) {
+      dates.push(key)
+      confirmed.push(dateData[key].delta.confirmed)
+    }
+    this.alineChartData = [
+      {data : confirmed.slice(-100), label : 'confirmed'}
+    ]
+    this.alineChartLabels = dates.slice(-100)
+  }
 }
 
 

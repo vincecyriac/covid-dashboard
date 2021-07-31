@@ -759,8 +759,9 @@ table td {
 
 @media screen and (max-width: 1190px) {
   #svg3 {
-    min-height: 300px;
-    max-height: 530vh;
+    min-height: auto;
+    max-height: 530px;
+    padding-bottom: 40px;
 
   }
 }

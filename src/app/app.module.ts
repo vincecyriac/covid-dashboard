@@ -14,6 +14,7 @@ import { WorldwideComponent } from './components/worldwide/worldwide.component';
 import { AboutComponent } from './components/about/about.component';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 import { CowinComponent } from './components/cowin/cowin.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CowinComponent } from './components/cowin/cowin.component';
     ReactiveFormsModule,
     NavbarModule,
     WavesModule,
-    ButtonsModule
+    ButtonsModule,
+    ChartsModule
   ],
   providers: [
     {

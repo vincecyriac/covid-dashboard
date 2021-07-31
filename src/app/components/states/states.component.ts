@@ -3,6 +3,7 @@ import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/service/dashboard.service';
 import { FormControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-states',
@@ -47,18 +48,105 @@ export class StatesComponent implements OnInit {
   disTConfirmed: any = "N/A";
   disTRecovered: any = "N/A";
   disTDeceased: any = "N/A";
-  disDisabled:any;
+  disDisabled: any;
+  confirmesData: any = [];
+  recoveredData: any = [];
+  deathData: any = [];
+  vaccine1data: any = [];
+  vaccine2data: any = [];
+  highstConfirmed:any=0;
 
 
 
   constructor(private nav: AppComponent, private DashSer: DashboardService) { }
 
+
+  public lineChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: false,
+    elements: {
+      line: {
+        tension: 0,
+        borderWidth: 0,
+      }
+    },
+    legend: {
+      position: 'top',
+      onClick: (e) => e.stopPropagation()
+    },
+  };
+  public lineChartLabels = [];
+  public lineChartType = 'line';
+  public lineChartLegend = true;
+
+  public alineChartData = [];
+  public alineChartLabels = [];
+
+
+  public clineChartData = []
+  public clineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgba(255,0,0,0.3)',
+      borderColor: 'red',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+
+  public rlineChartData = []
+  public rlineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgb(103, 223, 73, 0.3)',
+      borderColor: 'green',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+
+  public dlineChartData = []
+  public dlineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+
+  public vlineChartData = []
+  public vlineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgba(49, 62, 240,0.2)',
+      borderColor: 'rgb(0, 17, 255)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    {
+      backgroundColor: 'rgba(0, 245, 253, 0.2)',
+      borderColor: 'rgba(0, 245, 253,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+
+
+
   ngOnInit(): void {
-    this.disDisabled=true;
+    this.disDisabled = true;
     this.loaded = true;
     this.nav.routelinkr = 1;
     this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en')
-
     const fDateArr = this.today.split('-');
     const fyear: number = parseInt(fDateArr[0]);
     const fmonth: number = parseInt(fDateArr[1]);
@@ -68,7 +156,7 @@ export class StatesComponent implements OnInit {
     this.getIndiaData();
     this.getNews();
     this.IndiaTimeseries();
-
+    this.getLinechartLabel(this.today);
   }
 
 
@@ -80,7 +168,6 @@ export class StatesComponent implements OnInit {
   DatePicker = new FormGroup({
     date: new FormControl()
   });
-
 
   timestampConvert(timestamp) {
     let unix_timestamp = timestamp
@@ -186,13 +273,12 @@ export class StatesComponent implements OnInit {
     }
 
 
-    this.TotalVaccinated = data["TT"].total.vaccinated
+    this.TotalVaccinated = data["TT"].total.vaccinated2
     this.TotalCases = data["TT"].total.confirmed
     this.TotalDead = data["TT"].total.deceased
     this.TotalRecovered = data["TT"].total.recovered
     this.TotalOther = data["TT"].total.other
     this.TotalActive = (this.TotalCases - this.TotalDead - this.TotalRecovered - this.TotalOther)
-
   }
 
 
@@ -208,6 +294,11 @@ export class StatesComponent implements OnInit {
   }
 
   setMapColor(data) {
+    for (let index = 0; index < 37; index++) {
+      if(this.statewise[index].active > this.highstConfirmed){
+        this.highstConfirmed = this.statewise[index].active
+      }
+    }
     document.getElementById("AP").style.fill = this.setFill(this.statewise[1].active)
     document.getElementById("AR").style.fill = this.setFill(this.statewise[2].active)
     document.getElementById("AS").style.fill = this.setFill(this.statewise[3].active)
@@ -282,31 +373,31 @@ export class StatesComponent implements OnInit {
   }
 
   setFill(total) {
-    if (total >= (500000)) {
+    if (total >= (this.highstConfirmed*0.90)) {
       return ("#FF0000")
     }
-    else if (total >= (400000)) {
+    else if (total >= this.highstConfirmed*0.80) {
       return ("#FF2300")
     }
-    else if (total >= 300000) {
+    else if (total >= this.highstConfirmed*0.70) {
       return ("#FF4600")
     }
-    else if (total >= 200000) {
+    else if (total >= this.highstConfirmed*0.60) {
       return ("#FF6900")
     }
-    else if (total >= 100000) {
+    else if (total >= this.highstConfirmed*0.50) {
       return ("#FF8C00")
     }
-    else if (total >= 50000) {
+    else if (total >= this.highstConfirmed*0.40) {
       return ("#FFAF00")
     }
-    else if (total >= 30000) {
+    else if (total >= this.highstConfirmed*0.30) {
       return ("#FFD300")
     }
-    else if (total >= 10000) {
+    else if (total >= this.highstConfirmed*0.20) {
       return ("#FFF600")
     }
-    else if (total >= 5000) {
+    else if (total >= this.highstConfirmed*0.10) {
       return ("#D4FF00")
     }
     else {
@@ -342,7 +433,7 @@ export class StatesComponent implements OnInit {
     this.TotalCases = this.fullIndia[state].total.confirmed;
     this.TotalDead = this.fullIndia[state].total.deceased;
     this.TotalRecovered = this.fullIndia[state].total.recovered;
-    this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
+    this.TotalVaccinated = this.fullIndia[state].total.vaccinated2;
     if (this.fullIndia[state].total.other != null) {
       this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;
     }
@@ -352,7 +443,8 @@ export class StatesComponent implements OnInit {
     this.GetDaywise(this.today, this.currentStateId);
     this.DatePicker.controls['date'].setValue(this.maxDate);
     this.pushDistricts(this.currentStateId);
-    this.disDisabled=false;
+    this.disDisabled = false;
+    this.setChartData(state);
   }
 
   stateDropdown(event) {
@@ -365,7 +457,7 @@ export class StatesComponent implements OnInit {
       this.TotalCases = this.fullIndia[state].total.confirmed;
       this.TotalDead = this.fullIndia[state].total.deceased;
       this.TotalRecovered = this.fullIndia[state].total.recovered;
-      this.TotalVaccinated = this.fullIndia[state].total.vaccinated;
+      this.TotalVaccinated = this.fullIndia[state].total.vaccinated2;
       if (this.fullIndia[state].total.other != null) {
         this.TotalActive = this.fullIndia[state].total.confirmed - this.fullIndia[state].total.recovered - this.fullIndia[state].total.other - this.fullIndia[state].total.deceased;
       }
@@ -376,10 +468,11 @@ export class StatesComponent implements OnInit {
       this.GetDaywise(this.today, this.currentStateId);
       this.DatePicker.controls['date'].setValue(this.maxDate);
       this.pushDistricts(this.currentStateId);
-      this.disDisabled=false;
+      this.disDisabled = false;
+      this.setChartData(state);
     }
     else {
-      this.disDisabled=true;
+      this.disDisabled = true;
       this.getIndiaData()
       this.GetDaywise(this.today, "0");
       // this.districts=[]
@@ -393,7 +486,7 @@ export class StatesComponent implements OnInit {
       this.disTConfirmed = "N/A";
       this.disTRecovered = "N/A";
       this.disTDeceased = "N/A";
-
+      this.setChartData("TT");
     }
 
   }
@@ -491,8 +584,8 @@ export class StatesComponent implements OnInit {
   getIndiaToday() {
 
     if (this.fullIndia["TT"].delta) {
-      if (this.fullIndia["TT"].delta.vaccinated) {
-        this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated
+      if (this.fullIndia["TT"].delta.vaccinated2) {
+        this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated2
       }
       else {
         this.dayVaccinated = "N/A"
@@ -536,11 +629,14 @@ export class StatesComponent implements OnInit {
 
 
   }
+
   IndiaTimeseries() {
 
     this.DashSer.Timeseries().subscribe((Response) => {
       this.IndiaDaywise = Response;
       this.GetDaywise(this.today, "0")
+      this.setChartData("TT");
+      this.getAllData("TT")
       if (this.IndiaDaywise != null || this.fullIndia != null) {
         this.loaded = false;
       }
@@ -558,8 +654,8 @@ export class StatesComponent implements OnInit {
       var TTFul = this.IndiaDaywise["TT"].dates;
       if (TTFul[date]) {
         if (TTFul[date].delta) {
-          if (TTFul[date].delta.vaccinated) {
-            this.dayVaccinated = TTFul[date].delta.vaccinated
+          if (TTFul[date].delta.vaccinated2) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
             this.dayVaccinated = "N/A"
@@ -615,8 +711,8 @@ export class StatesComponent implements OnInit {
 
       if (TTFul[date]) {
         if (TTFul[date].delta) {
-          if (TTFul[date].delta.vaccinated) {
-            this.dayVaccinated = TTFul[date].delta.vaccinated
+          if (TTFul[date].delta.vaccinated2) {
+            this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
             this.dayVaccinated = "N/A"
@@ -722,28 +818,28 @@ export class StatesComponent implements OnInit {
     else {
       this.disTested = "N/A";
     }
-    if (AllDisData[district].total.vaccinated) {
-      this.disVaccinated = AllDisData[district].total.vaccinated;
+    if (AllDisData[district].total.vaccinated2) {
+      this.disVaccinated = AllDisData[district].total.vaccinated2;
     }
     else {
       this.disVaccinated = "N/A";
     }
 
-    if(AllDisData[district].delta){
+    if (AllDisData[district].delta) {
       if (AllDisData[district].delta.confirmed) {
         this.disTConfirmed = AllDisData[district].delta.confirmed;
       }
       else {
         this.disTConfirmed = "N/A";
       }
-  
+
       if (AllDisData[district].delta.deceased) {
         this.disTDeceased = AllDisData[district].delta.deceased;
       }
       else {
         this.disTDeceased = "N/A";
       }
-  
+
       if (AllDisData[district].delta.recovered) {
         this.disTRecovered = AllDisData[district].delta.recovered;
       }
@@ -752,7 +848,7 @@ export class StatesComponent implements OnInit {
       }
 
     }
-    else{
+    else {
       this.disTConfirmed = "N/A";
       this.disTRecovered = "N/A";
       this.disTDeceased = "N/A";
@@ -764,7 +860,88 @@ export class StatesComponent implements OnInit {
     this.getDisData(this.currentStateId, selectedDistrict)
   }
 
+  getLinechartLabel(today) {
+    this.lineChartLabels = []
+    var tempDateArr: any = []
+    const fDateArr = today.split('-');
+    var fyear: number = parseInt(fDateArr[0]);
+    var fmonth: number = parseInt(fDateArr[1]);
+    var fday: number = parseInt(fDateArr[2]);
+    var prevday: any;
 
+    for (let i = 1; i <= 10; i++) {
+      if (fday - i == 0) {
+        fmonth -= 1
+        if (fmonth == 1 || fmonth == 3 || fmonth == 5 || fmonth == 7 || fmonth == 8 || fmonth == 10 || fmonth == 12) {
+          fday = 31
+        }
+        else if (fmonth == 4 || fmonth == 6 || fmonth == 9 || fmonth == 11) {
+          fday = 30
+        }
+        else if (fmonth == 2) {
+          fday = 28
+        }
+        prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + fday).slice(-2)
+        tempDateArr.push(prevday)
+        for (let j = 1; j <= 10 - i; j++) {
+          prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + (fday - j)).slice(-2)
+          tempDateArr.push(prevday)
+        }
+        break;
+      }
+      else if (fday - i >= 1) {
+        prevday = fyear + '-' + ('0' + fmonth).slice(-2) + '-' + ('0' + (fday - i)).slice(-2)
+        tempDateArr.push(prevday)
+      }
+    }
+    this.lineChartLabels = tempDateArr.reverse();
+  }
+  setChartData(state) {
+    this.confirmesData = []
+    this.recoveredData = []
+    this.vaccine1data = []
+    this.vaccine2data = []
+    this.deathData = []
+    var dayData: any;
+    var StateData = this.IndiaDaywise[state].dates
+
+
+    for (let i = 0; i < 10; i++) {
+      dayData = StateData[this.lineChartLabels[i]]
+      this.confirmesData.push(dayData.delta.confirmed)
+      this.recoveredData.push(dayData.delta.recovered)
+      this.deathData.push(dayData.delta.deceased)
+      this.vaccine1data.push(dayData.delta.vaccinated1)
+      this.vaccine2data.push(dayData.delta.vaccinated2)
+    }
+
+    this.clineChartData = [
+      { data: this.confirmesData, label: 'Confirmed' }
+    ];
+    this.rlineChartData = [
+      { data: this.recoveredData, label: 'Recovered' }
+    ];
+    this.dlineChartData = [
+      { data: this.deathData, label: 'Deceased' }
+    ];
+    this.vlineChartData = [
+      { data: this.vaccine1data, label: 'Dose 1' },
+      { data: this.vaccine2data, label: 'Dose 2' }
+    ];
+  }
+  getAllData(state) {
+    var dateData = this.IndiaDaywise[state].dates
+    var confirmed: any = [];
+    var dates: any = [];
+    for (let key in dateData) {
+      dates.push(key)
+      confirmed.push(dateData[key].delta.confirmed)
+    }
+    this.alineChartData = [
+      {data : confirmed.slice(-100), label : 'confirmed'}
+    ]
+    this.alineChartLabels = dates.slice(-100)
+  }
 }
 
 

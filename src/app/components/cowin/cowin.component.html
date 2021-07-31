@@ -96,9 +96,19 @@
                     </div>
                   </div>
                   <div class="row search-results" *ngIf="centerCount!=0">
-                    <div class="col-12 ml-2 mb-2">
-                      Available centers: {{centerCount}}
-                    </div>
+                    <!-- <div class="col-md-6">
+                      <form [formGroup]="DatePicker">
+                        <div class="input-group datepicker">
+                          <input class="form-control text-center" placeholder="yyyy-mm-dd" formControlName="date"
+                            [maxDate]="maxDate" [minDate]="minDate" name="dp" ngbDatepicker #d="ngbDatepicker"
+                            [readonly]="true" (click)="d.toggle()"
+                            (ngModelChange)="dateselect(DatePicker.controls['date'].value)">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"></button>
+                          </div>
+                        </div>
+                      </form> 
+                    </div> --> 
                     <div class="col-12">
                       <div id="accordion">
                         
@@ -106,6 +116,7 @@
                           <button (click)="findSessions(cntr.center_id)" class="card-header" id="headingTwo{{i}}" data-toggle="collapse" attr.data-target="#collapseTwo{{i}}" aria-expanded="false" attr.aria-controls="collapseTwo{{i}}">
                             <h6 class="mb-0 row"> 
                                 <div class="col-12 acc-title-name">
+                                  <i class="fa fa-caret-down mr-2" aria-hidden="true"></i>
                                   {{cntr.name}} 
                                   <div class="badge green float-right" *ngIf="availability(cntr.center_id)!=0">{{availability(cntr.center_id)}}</div>
                                   <div class="badge red float-right" *ngIf="availability(cntr.center_id)==0">0</div>
@@ -135,7 +146,8 @@
                                           <td data-label="Slots">{{sns.available_capacity}}</td>
                                           <td data-label="Dose 1">{{sns.available_capacity_dose1}}</td>
                                           <td data-label="Dose 2">{{sns.available_capacity_dose2}}</td>
-                                          <td data-label="Age Group">{{findAgeGroup(sns.min_age_limit)}}</td>
+                                          <!-- <td data-label="Age Group">{{findAgeGroup(sns.min_age_limit)}}</td> -->
+                                          <td data-label="Age Group">{{sns.min_age_limit}}+</td>
                                           <td data-label="Fee type">{{cntr.fee_type}}</td>
                                         </tr>
                                       </tbody>
@@ -154,44 +166,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-6 col-sm-6 cowin-dashboard">
-              <div class="row">
-                <div class="col-12 text-center slot-check-title">
-                  &nbsp;
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="world-widget">
-                    <div class="icon gradient-13">
-                      <i class="fa fa-map"></i>
-                    </div>
-                    <div>
-                      <h5>State</h5>
-                      <h2 id="total_cases">www</h2>
-                    </div>
-                  </div>
-                  <div class="world-widget">
-                    <div class="icon gradient-13">
-                      <i class="fa fa-map"></i>
-                    </div>
-                    <div>
-                      <h5>State</h5>
-                      <h2 id="total_cases">www</h2>
-                    </div>
-                  </div>
-                  <div class="world-widget">
-                    <div class="icon gradient-13">
-                      <i class="fa fa-map"></i>
-                    </div>
-                    <div>
-                      <h5>State</h5>
-                      <h2 id="total_cases">www</h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>

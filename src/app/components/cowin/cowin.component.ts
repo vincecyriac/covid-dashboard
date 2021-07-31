@@ -20,6 +20,9 @@ export class CowinComponent implements OnInit {
   pinclick:boolean=false;
   submitted = false;
   loaded: boolean;
+  today:any;
+  maxDate: any;
+  minDate: any = { year: 2020, month: 6, day: 1 };
 
   constructor(private cowinSer: CowinService) { }
 
@@ -30,8 +33,18 @@ export class CowinComponent implements OnInit {
   byPin = new FormGroup({
     pin: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]{5}$')])
   });
+  DatePicker = new FormGroup({
+    date: new FormControl()
+  });
 
   ngOnInit(): void {
+    this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en')
+    const fDateArr = this.today.split('-');
+    const fyear: number = parseInt(fDateArr[0]);
+    const fmonth: number = parseInt(fDateArr[1]);
+    const fday: number = parseInt(fDateArr[2]);
+    this.minDate = { year: fyear, month: fmonth, day: fday };
+    //this.DatePicker.controls['date'].setValue(this.maxDate);
     this.getState();
     this.loaded = true;
     //this.getSlotdatabyDis(formatDate(new Date(), 'dd-MM-yyyy', 'en'));
@@ -63,7 +76,6 @@ export class CowinComponent implements OnInit {
     this.cowinSer.slotByDis(this.selectedDisId,date).subscribe((Response) => {
       this.centers=Response.centers;
       this.centerCount=this.centers.length;
-      console.log(this.centerCount)
     },
       (Error) => {
         console.error("Error");
@@ -105,7 +117,7 @@ export class CowinComponent implements OnInit {
     });
   }
 
-  findAgeGroup(age){
+  /* findAgeGroup(age){
     if(age>=45){
       return("45+")
     }
@@ -115,7 +127,7 @@ export class CowinComponent implements OnInit {
     else{
       return("0-18")
     }
-  }
+  } */
   availability(id){
     var ssns=[];
     var count:number=0;

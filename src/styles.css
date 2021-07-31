@@ -633,6 +633,7 @@ table td {
 #svg3 {
   min-height: 500px;
   max-height: 500px;
+  width: -webkit-fill-available;
   fill: #00FF00 !important;
   stroke: #ffffff;
 

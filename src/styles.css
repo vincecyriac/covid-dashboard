@@ -606,8 +606,8 @@ table td {
   }
 
   #svg2 {
-    min-height: 60vh;
-    max-height: 75vh;
+    min-height: auto;
+    max-height: auto;
   }
 
   .news-section {

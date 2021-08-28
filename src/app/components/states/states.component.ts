@@ -34,7 +34,7 @@ export class StatesComponent implements OnInit {
   dayVaccinated: any;
   dayTested: any;
   maxDate: any;
-  minDate: any = { year: 2020, month: 6, day: 1 };
+  minDate: any = { year: 2020, month: 1, day: 1 };
   IndiaDaywise: any;
   currentStateId: any = "0";
   loaded: boolean;
@@ -418,7 +418,7 @@ export class StatesComponent implements OnInit {
 
 
   newsupdate(news) {
-    return (news.replace(/\n\n/g, "・"))
+    return (news.replace(/\n/g, "<br/>"))
   }
 
 

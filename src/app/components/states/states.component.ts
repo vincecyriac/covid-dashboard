@@ -418,7 +418,7 @@ export class StatesComponent implements OnInit {
 
 
   newsupdate(news) {
-    return (news.replace(/\n\n/g, "・"))
+    return (news.replace(/\n/g, "<br/>"))
   }
 
 

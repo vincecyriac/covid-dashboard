@@ -327,8 +327,8 @@
                     <div class="news-time">
                       {{timestampConvert(Updates.timestamp)}}
                     </div>
-                    <div class="news-update">
-                      {{newsupdate(Updates.update)}}
+                    <div class="news-update" [innerHTML]="newsupdate(Updates.update)">
+                      <!-- {{newsupdate(Updates.update)}} -->
                     </div>
                   </div>
                 </ng-scrollbar>

@@ -1,0 +1,18 @@
+.banner {
+    background: rgba(220,53,69,.12549019607843137);
+    color: #dc3545;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+}
+.banner a{
+    color: red;
+    text-decoration: none !important;
+}
+.banner a:hover,.banner a:focus{
+    color: red;
+    text-decoration: none !important;
+}
+.banner a i{
+    font-size: 10px;
+}

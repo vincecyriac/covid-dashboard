@@ -908,11 +908,11 @@ export class StatesComponent implements OnInit {
 
     for (let i = 0; i < 10; i++) {
       dayData = StateData[this.lineChartLabels[i]]
-      this.confirmesData.push(dayData.delta.confirmed)
-      this.recoveredData.push(dayData.delta.recovered)
-      this.deathData.push(dayData.delta.deceased)
-      this.vaccine1data.push(dayData.delta.vaccinated1)
-      this.vaccine2data.push(dayData.delta.vaccinated2)
+      dayData?.delta.confirmed ? this.confirmesData.push(dayData?.delta.confirmed) : this.confirmesData.push(0)
+      dayData?.delta.recovered ? this.recoveredData.push(dayData?.delta.recovered) : this.recoveredData.push(0)
+      dayData?.delta.deceased ? this.deathData.push(dayData?.delta.deceased) : this.deathData.push(0)
+      dayData?.delta.vaccinated1 ? this.vaccine1data.push(dayData?.delta.vaccinated1) :  this.vaccine1data.push(0)
+      dayData?.delta.vaccinated2 ? this.vaccine2data.push(dayData?.delta.vaccinated2) : this.vaccine2data.push(0)
     }
 
     this.clineChartData = [
@@ -942,6 +942,8 @@ export class StatesComponent implements OnInit {
     ]
     this.alineChartLabels = dates.slice(-100)
   }
+ 
+  
 }
 
 

@@ -1398,3 +1398,9 @@ table td {
 #accordion .fa{
   font-size: 20px;
 }
+
+.tooltipIcon{
+  position: absolute;
+  top: 10px;
+  right: 30px;
+}

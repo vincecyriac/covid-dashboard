@@ -15,6 +15,7 @@ import { AboutComponent } from './components/about/about.component';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 import { CowinComponent } from './components/cowin/cowin.component';
 import { ChartsModule } from 'ng2-charts';
+import { CountUpModule } from 'ngx-countup';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChartsModule } from 'ng2-charts';
     NavbarModule,
     WavesModule,
     ButtonsModule,
-    ChartsModule
+    ChartsModule,
+    CountUpModule
   ],
   providers: [
     {

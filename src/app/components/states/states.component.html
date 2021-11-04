@@ -11,6 +11,11 @@
 </div>
 <div class="dashboard">
   <ng-scrollbar id="states">
+    <div class="col-12 p-2 text-center banner">
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      There will be no new updates from 31st October, 2021 onwards.  
+      <a href="https://blog.covid19india.org/2021/08/07/end/" target="_blank">Read the full blog post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
     <section class="dash-section">
       <div class="row ">
         <div class="col-12 lastupdate">
@@ -144,7 +149,7 @@
           <div class="col-12">
             <div class="world-statistics">
               <div class="row align-items-center">
-                <div class="col-sm-12 col-md-6 col">
+                <div class="col-sm-12 col-md-6 col" >
                   <div class="world-widget">
                     <div class="icon gradient-13">
                       <i class="fa fa-map"></i>
@@ -162,7 +167,7 @@
                     </div>
                     <div>
                       <h5>Total Cases</h5>
-                      <h2 id="total_cases">{{TotalCases}}</h2>
+                      <h2 id="total_cases" [countUp]="TotalCases" [options]="{ duration : 2,useGrouping :  false}"><!-- {{TotalCases}} --></h2>
                     </div>
                   </div>
                 </div>
@@ -173,7 +178,7 @@
                     </div>
                     <div>
                       <h5>Total Death</h5>
-                      <h2 id="total_deaths">{{TotalDead}}</h2>
+                      <h2 id="total_deaths" [countUp]="TotalDead" [options]="{ duration : 2,useGrouping :  false}"><!-- {{TotalDead}} --></h2>
                     </div>
                   </div>
                 </div>
@@ -184,7 +189,7 @@
                     </div>
                     <div>
                       <h5>Total Recovered</h5>
-                      <h2 id="total_recovered">{{TotalRecovered}}</h2>
+                      <h2 id="total_recovered" [countUp]="TotalRecovered" [options]="{ duration : 2,useGrouping :  false}"><!-- {{TotalRecovered}} --></h2>
                     </div>
                   </div>
                 </div>
@@ -195,7 +200,7 @@
                     </div>
                     <div>
                       <h5>Total Active</h5>
-                      <h2 id="new_cases">{{TotalActive}}</h2>
+                      <h2 id="new_cases" [countUp]="TotalActive" [options]="{ duration : 2,useGrouping :  false}"><!-- {{TotalActive}} --></h2>
                     </div>
                   </div>
                 </div>
@@ -206,7 +211,7 @@
                     </div>
                     <div>
                       <h5>Vaccinated (2 Dose)</h5>
-                      <h2 id="new_deaths">{{TotalVaccinated}}</h2>
+                      <h2 id="new_deaths" [countUp]="TotalVaccinated" [options]="{ duration : 2,useGrouping :  false}"><!-- {{TotalVaccinated}} --></h2>
                     </div>
                   </div>
                 </div>
@@ -240,11 +245,11 @@
                           <tbody>
                             <tr>
                               <td data-label="State">{{currentState}}</td>
-                              <td data-label="Confirmed">{{dayConfirmed}}</td>
-                              <td data-label="Recovered">{{dayRecovered}}</td>
-                              <td data-label="Deceased">{{dayDeceased}}</td>
-                              <td data-label="Vaccinated (2 Dose)">{{dayVaccinated}}</td>
-                              <td data-label="Tested">{{dayTested}}</td>
+                              <td data-label="Confirmed" [countUp]="dayConfirmed" [options]="{ duration : 2,useGrouping :  false}"><!-- {{dayConfirmed}} --></td>
+                              <td data-label="Recovered" [countUp]="dayRecovered" [options]="{ duration : 2,useGrouping :  false}"><!-- {{dayRecovered}} --></td>
+                              <td data-label="Deceased" [countUp]="dayDeceased" [options]="{ duration : 2,useGrouping :  false}"><!-- {{dayDeceased}} --></td>
+                              <td data-label="Vaccinated (2 Dose)" [countUp]="dayVaccinated" [options]="{ duration : 2,useGrouping :  false}"><!-- {{dayVaccinated}} --></td>
+                              <td data-label="Tested" [countUp]="dayTested" [options]="{ duration : 2,useGrouping :  false}"><!-- {{dayTested}} --></td>
                             </tr>
 
                           </tbody>
@@ -278,7 +283,7 @@
                       <option *ngFor="let dis of districts" value="{{dis}}">{{dis}}</option>
 
                     </select>
-                    <select disabled *ngIf="disDisabled">
+                    <select  *ngIf="disDisabled"  placement="top" ngbTooltip="Please select a state from map or above dropdown" triggers="click:blur hover">
                       <option>No state selected!</option>
 
                     </select>
@@ -291,15 +296,15 @@
                     <tbody>
                       <tr>
                         <td class="text-center disTable-title">Total</td>
-                        <td data-label="Confirmed">{{disConfirmed}}</td>
-                        <td data-label="Recovered">{{disRecovered}}</td>
-                        <td data-label="Deceased">{{disDeceased}}</td>
-                        <td data-label="Vaccinated (2 Dose)">{{disVaccinated}}</td>
-                        <td data-label="Tested">{{disTested}}</td>
+                        <td data-label="Confirmed" [countUp]="disConfirmed" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disConfirmed}} --></td>
+                        <td data-label="Recovered" [countUp]="disRecovered" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disRecovered}} --></td>
+                        <td data-label="Deceased" [countUp]="disDeceased" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disDeceased}} --></td>
+                        <td data-label="Vaccinated (2 Dose)" [countUp]="disVaccinated" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disVaccinated}} --></td>
+                        <td data-label="Tested" [countUp]="disTested" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disTested}} --></td>
                         <td class="text-center disTable-title">New Cases</td>
-                        <td data-label="Confirmed">{{disTConfirmed}}</td>
-                        <td data-label="Recovered">{{disTRecovered}}</td>
-                        <td data-label="Deceased">{{disTDeceased}}</td>
+                        <td data-label="Confirmed" [countUp]="disTConfirmed" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disTConfirmed}} --></td>
+                        <td data-label="Recovered" [countUp]="disTRecovered" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disTRecovered}} --></td>
+                        <td data-label="Deceased" [countUp]="disTDeceased" [options]="{ duration : 2,useGrouping :  false}"><!-- {{disTDeceased}} --></td>
 
                       </tr>
                     </tbody>
@@ -328,7 +333,6 @@
                       {{timestampConvert(Updates.timestamp)}}
                     </div>
                     <div class="news-update" [innerHTML]="newsupdate(Updates.update)">
-                      <!-- {{newsupdate(Updates.update)}} -->
                     </div>
                   </div>
                 </ng-scrollbar>
@@ -338,14 +342,6 @@
         </div>
       </div>
       <div class="row data-charts">
-
-        <!-- <div class="col-md-12 col-sm-12 charts" >
-          <div style="display: block" class="chart-canvas">
-            <canvas baseChart height="350" [datasets]="alineChartData" [labels]="alineChartLabels" [options]="lineChartOptions"
-              [legend]="lineChartLegend" [chartType]="lineChartType" [colors]="clineChartColors">
-            </canvas>
-          </div>
-        </div> -->
 
         <div class="col-md-6 col-sm-12 charts" >
           <div style="display: block" class="chart-canvas">

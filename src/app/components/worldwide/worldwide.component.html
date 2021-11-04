@@ -797,7 +797,7 @@
                   </div>
                   <div>
                     <h5>Today cases</h5>
-                    <h2 id="total_cases">{{todayCases}}</h2>
+                    <h2 id="total_cases" [countUp]="todayCases" [options]="{ duration : 2,useGrouping :  false}"><!-- {{todayCases}} --></h2>
                   </div>
                 </div>
               </div>
@@ -808,7 +808,7 @@
                   </div>
                   <div>
                     <h5>Today death</h5>
-                    <h2 id="total_cases">{{todayDeaths}}</h2>
+                    <h2 id="total_cases" [countUp]="todayDeaths" [options]="{ duration : 2,useGrouping :  false}"><!-- {{todayDeaths}} --></h2>
                   </div>
                 </div>
               </div>
@@ -819,7 +819,7 @@
                   </div>
                   <div>
                     <h5>Total cases</h5>
-                    <h2 id="total_cases">{{cases}}</h2>
+                    <h2 id="total_cases" [countUp]="cases" [options]="{ duration : 2,useGrouping :  false}"><!-- {{cases}} --></h2>
                   </div>
                 </div>
               </div>
@@ -830,7 +830,7 @@
                   </div>
                   <div>
                     <h5>Cases per one million</h5>
-                    <h2 id="total_cases">{{casesPerOneMillion}}</h2>
+                    <h2 id="total_cases" [countUp]="casesPerOneMillion" [options]="{ duration : 2,useGrouping :  false}"><!-- {{casesPerOneMillion}} --></h2>
                   </div>
                 </div>
               </div>
@@ -841,7 +841,7 @@
                   </div>
                   <div>
                     <h5>Active</h5>
-                    <h2 id="total_cases">{{active}}</h2>
+                    <h2 id="total_cases" [countUp]="active" [options]="{ duration : 2,useGrouping :  false}"><!-- {{active}} --></h2>
                   </div>
                 </div>
               </div>
@@ -852,7 +852,7 @@
                   </div>
                   <div>
                     <h5>Active per one million</h5>
-                    <h2 id="total_cases">{{activePerOneMillion}}</h2>
+                    <h2 id="total_cases" [countUp]="activePerOneMillion" [options]="{ duration : 2,useGrouping :  false}"><!-- {{activePerOneMillion}} --></h2>
                   </div>
                 </div>
               </div>
@@ -863,7 +863,7 @@
                   </div>
                   <div>
                     <h5>Deaths</h5>
-                    <h2 id="total_cases">{{deaths}}</h2>
+                    <h2 id="total_cases" [countUp]="deaths" [options]="{ duration : 2,useGrouping :  false}"><!-- {{deaths}} --></h2>
                   </div>
                 </div>
               </div>
@@ -874,7 +874,7 @@
                   </div>
                   <div>
                     <h5>Deaths per one million</h5>
-                    <h2 id="total_cases">{{deathsPerOneMillion}}</h2>
+                    <h2 id="total_cases" [countUp]="deathsPerOneMillion" [options]="{ duration : 2,useGrouping :  false}"><!-- {{deathsPerOneMillion}} --></h2>
                   </div>
                 </div>
               </div>
@@ -885,7 +885,7 @@
                   </div>
                   <div>
                     <h5>Recovered</h5>
-                    <h2 id="total_cases">{{recovered}}</h2>
+                    <h2 id="total_cases" [countUp]="recovered" [options]="{ duration : 2,useGrouping :  false}"><!-- {{recovered}} --></h2>
                   </div>
                 </div>
               </div>
@@ -896,7 +896,7 @@
                   </div>
                   <div>
                     <h5>Test</h5>
-                    <h2 id="total_cases">{{tests}}</h2>
+                    <h2 id="total_cases" [countUp]="tests" [options]="{ duration : 2,useGrouping :  false}"><!-- {{tests}} --></h2>
                   </div>
                 </div>
               </div>
@@ -929,13 +929,13 @@
                   <table>
                     <tbody>
                       <tr>
-                        <td data-label="Active">{{cntntactive}}</td>
-                        <td data-label="Recovered">{{cntntrecovered}}</td>
-                        <td data-label="Death">{{cntntdeaths}}</td>
-                        <td data-label="Confirmed">{{cntntcases}}</td>
-                        <td data-label="Tested">{{cntnttests}}</td>
-                        <td data-label="New cases">{{cntnttodayCases}}</td>
-                        <td data-label="New deaths">{{cntnttodayDeaths}}</td>
+                        <td data-label="Active" [countUp]="cntntactive" [options]="{ duration : 2,useGrouping :  false}">{{cntntactive}}</td>
+                        <td data-label="Recovered" [countUp]="cntntrecovered" [options]="{ duration : 2,useGrouping :  false}">{{cntntrecovered}}</td>
+                        <td data-label="Death" [countUp]="cntntdeaths" [options]="{ duration : 2,useGrouping :  false}">{{cntntdeaths}}</td>
+                        <td data-label="Confirmed" [countUp]="cntntcases" [options]="{ duration : 2,useGrouping :  false}">{{cntntcases}}</td>
+                        <td data-label="Tested" [countUp]="cntnttests" [options]="{ duration : 2,useGrouping :  false}">{{cntnttests}}</td>
+                        <td data-label="New cases" [countUp]="cntnttodayCases" [options]="{ duration : 2,useGrouping :  false}">{{cntnttodayCases}}</td>
+                        <td data-label="New deaths" [countUp]="cntnttodayDeaths" [options]="{ duration : 2,useGrouping :  false}">{{cntnttodayDeaths}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -962,13 +962,13 @@
                   <table>
                     <tbody>
                       <tr>
-                        <td data-label="Active">{{cntryactive}}</td>
-                        <td data-label="Recovered">{{cntryrecovered}}</td>
-                        <td data-label="Death">{{cntrydeaths}}</td>
-                        <td data-label="Confirmed">{{cntrycases}}</td>
-                        <td data-label="Tested">{{cntrytests}}</td>
-                        <td data-label="New cases">{{cntrytodayCases}}</td>
-                        <td data-label="New deaths">{{cntrytodayDeaths}}</td>
+                        <td data-label="Active" [countUp]="cntryactive" [options]="{ duration : 2,useGrouping :  false}">{{cntryactive}}</td>
+                        <td data-label="Recovered" [countUp]="cntryrecovered" [options]="{ duration : 2,useGrouping :  false}">{{cntryrecovered}}</td>
+                        <td data-label="Death" [countUp]="cntrydeaths" [options]="{ duration : 2,useGrouping :  false}">{{cntrydeaths}}</td>
+                        <td data-label="Confirmed" [countUp]="cntrycases" [options]="{ duration : 2,useGrouping :  false}">{{cntrycases}}</td>
+                        <td data-label="Tested" [countUp]="cntrytests" [options]="{ duration : 2,useGrouping :  false}">{{cntrytests}}</td>
+                        <td data-label="New cases" [countUp]="cntrytodayCases" [options]="{ duration : 2,useGrouping :  false}">{{cntrytodayCases}}</td>
+                        <td data-label="New deaths" [countUp]="cntrytodayDeaths" [options]="{ duration : 2,useGrouping :  false}">{{cntrytodayDeaths}}</td>
                         
                       </tr>
                     </tbody>

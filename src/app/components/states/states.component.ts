@@ -39,15 +39,15 @@ export class StatesComponent implements OnInit {
   currentStateId: any = "0";
   loaded: boolean;
   districts: any = ["Please select a state"];
-  disConfirmed: any = "N/A";
-  disRecovered: any = "N/A";
-  disDeceased: any = "N/A";
-  disVaccinated: any = "N/A";
-  disTested: any = "N/A";
-  disActive: any = "N/A";
-  disTConfirmed: any = "N/A";
-  disTRecovered: any = "N/A";
-  disTDeceased: any = "N/A";
+  disConfirmed: any = 0;
+  disRecovered: any = 0;
+  disDeceased: any = 0;
+  disVaccinated: any = 0;
+  disTested: any = 0;
+  disActive: any = 0;
+  disTConfirmed: any = 0;
+  disTRecovered: any = 0;
+  disTDeceased: any = 0;
   disDisabled: any;
   confirmesData: any = [];
   recoveredData: any = [];
@@ -477,15 +477,15 @@ export class StatesComponent implements OnInit {
       this.GetDaywise(this.today, "0");
       // this.districts=[]
       this.districts = ["Please select a state"];
-      this.disConfirmed = "N/A";
-      this.disRecovered = "N/A";
-      this.disDeceased = "N/A";
-      this.disVaccinated = "N/A";
-      this.disTested = "N/A";
-      this.disActive = "N/A";
-      this.disTConfirmed = "N/A";
-      this.disTRecovered = "N/A";
-      this.disTDeceased = "N/A";
+      this.disConfirmed = 0;
+      this.disRecovered = 0;
+      this.disDeceased = 0;
+      this.disVaccinated = 0;
+      this.disTested = 0;
+      this.disActive = 0;
+      this.disTConfirmed = 0;
+      this.disTRecovered = 0;
+      this.disTDeceased = 0;
       this.setChartData("TT");
     }
 
@@ -588,42 +588,42 @@ export class StatesComponent implements OnInit {
         this.dayVaccinated = this.fullIndia["TT"].delta.vaccinated2
       }
       else {
-        this.dayVaccinated = "N/A"
+        this.dayVaccinated = 0
       }
 
       if (this.fullIndia["TT"].delta.confirmed) {
         this.dayConfirmed = this.fullIndia["TT"].delta.confirmed;
       }
       else {
-        this.dayConfirmed = "N/A"
+        this.dayConfirmed = 0
       }
 
       if (this.fullIndia["TT"].delta.deceased) {
         this.dayDeceased = this.fullIndia["TT"].delta.deceased;
       }
       else {
-        this.dayDeceased = "N/A"
+        this.dayDeceased = 0
       }
 
       if (this.fullIndia["TT"].delta.recovered) {
         this.dayRecovered = this.fullIndia["TT"].delta.recovered;
       }
       else {
-        this.dayRecovered = "N/A"
+        this.dayRecovered = 0
       }
       if (this.fullIndia["TT"].delta.tested) {
         this.dayTested = this.fullIndia["TT"].delta.tested
       }
       else {
-        this.dayTested = "N/A"
+        this.dayTested = 0
       }
     }
     else {
-      this.dayTested = "N/A";
-      this.dayRecovered = "N/A";
-      this.dayDeceased = "N/A";
-      this.dayConfirmed = "N/A";
-      this.dayVaccinated = "N/A";
+      this.dayTested = 0;
+      this.dayRecovered = 0;
+      this.dayDeceased = 0;
+      this.dayConfirmed = 0;
+      this.dayVaccinated = 0;
     }
 
 
@@ -658,50 +658,50 @@ export class StatesComponent implements OnInit {
             this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
-            this.dayVaccinated = "N/A"
+            this.dayVaccinated = 0
           }
 
           if (TTFul[date].delta.confirmed) {
             this.dayConfirmed = TTFul[date].delta.confirmed;
           }
           else {
-            this.dayConfirmed = "N/A"
+            this.dayConfirmed = 0
           }
 
           if (TTFul[date].delta.deceased) {
             this.dayDeceased = TTFul[date].delta.deceased;
           }
           else {
-            this.dayDeceased = "N/A"
+            this.dayDeceased = 0
           }
 
           if (TTFul[date].delta.recovered) {
             this.dayRecovered = TTFul[date].delta.recovered;
           }
           else {
-            this.dayRecovered = "N/A"
+            this.dayRecovered = 0
           }
           if (TTFul[date].delta.tested) {
             this.dayTested = TTFul[date].delta.tested
           }
           else {
-            this.dayTested = "N/A"
+            this.dayTested = 0
           }
         }
         else {
-          this.dayTested = "N/A";
-          this.dayRecovered = "N/A";
-          this.dayDeceased = "N/A";
-          this.dayConfirmed = "N/A";
-          this.dayVaccinated = "N/A";
+          this.dayTested = 0;
+          this.dayRecovered = 0;
+          this.dayDeceased = 0;
+          this.dayConfirmed = 0;
+          this.dayVaccinated = 0;
         }
       }
       else {
-        this.dayTested = "N/A";
-        this.dayRecovered = "N/A";
-        this.dayDeceased = "N/A";
-        this.dayConfirmed = "N/A";
-        this.dayVaccinated = "N/A";
+        this.dayTested = 0;
+        this.dayRecovered = 0;
+        this.dayDeceased = 0;
+        this.dayConfirmed = 0;
+        this.dayVaccinated = 0;
       }
 
     }
@@ -715,50 +715,50 @@ export class StatesComponent implements OnInit {
             this.dayVaccinated = TTFul[date].delta.vaccinated2
           }
           else {
-            this.dayVaccinated = "N/A"
+            this.dayVaccinated = 0
           }
 
           if (TTFul[date].delta.confirmed) {
             this.dayConfirmed = TTFul[date].delta.confirmed;
           }
           else {
-            this.dayConfirmed = "N/A"
+            this.dayConfirmed = 0
           }
 
           if (TTFul[date].delta.deceased) {
             this.dayDeceased = TTFul[date].delta.deceased;
           }
           else {
-            this.dayDeceased = "N/A"
+            this.dayDeceased = 0
           }
 
           if (TTFul[date].delta.recovered) {
             this.dayRecovered = TTFul[date].delta.recovered;
           }
           else {
-            this.dayRecovered = "N/A"
+            this.dayRecovered = 0
           }
           if (TTFul[date].delta.tested) {
             this.dayTested = TTFul[date].delta.tested
           }
           else {
-            this.dayTested = "N/A"
+            this.dayTested = 0
           }
         }
         else {
-          this.dayTested = "N/A";
-          this.dayRecovered = "N/A";
-          this.dayDeceased = "N/A";
-          this.dayConfirmed = "N/A";
-          this.dayVaccinated = "N/A";
+          this.dayTested = 0;
+          this.dayRecovered = 0;
+          this.dayDeceased = 0;
+          this.dayConfirmed = 0;
+          this.dayVaccinated = 0;
         }
       }
       else {
-        this.dayTested = "N/A";
-        this.dayRecovered = "N/A";
-        this.dayDeceased = "N/A";
-        this.dayConfirmed = "N/A";
-        this.dayVaccinated = "N/A";
+        this.dayTested = 0;
+        this.dayRecovered = 0;
+        this.dayDeceased = 0;
+        this.dayConfirmed = 0;
+        this.dayVaccinated = 0;
       }
     }
   }
@@ -788,41 +788,41 @@ export class StatesComponent implements OnInit {
       this.disConfirmed = AllDisData[district].total.confirmed;
     }
     else {
-      this.disConfirmed = "N/A";
+      this.disConfirmed = 0;
     }
 
     if (AllDisData[district].total.deceased) {
       this.disDeceased = AllDisData[district].total.deceased;
     }
     else {
-      this.disDeceased = "N/A";
+      this.disDeceased = 0;
     }
 
     if (AllDisData[district].total.recovered) {
       this.disRecovered = AllDisData[district].total.recovered;
     }
     else {
-      this.disRecovered = "N/A";
+      this.disRecovered = 0;
     }
 
     if (AllDisData[district].total.recovered) {
       this.disRecovered = AllDisData[district].total.recovered;
     }
     else {
-      this.disRecovered = "N/A";
+      this.disRecovered = 0;
     }
 
     if (AllDisData[district].total.tested) {
       this.disTested = AllDisData[district].total.tested;
     }
     else {
-      this.disTested = "N/A";
+      this.disTested = 0;
     }
     if (AllDisData[district].total.vaccinated2) {
       this.disVaccinated = AllDisData[district].total.vaccinated2;
     }
     else {
-      this.disVaccinated = "N/A";
+      this.disVaccinated = 0;
     }
 
     if (AllDisData[district].delta) {
@@ -830,28 +830,28 @@ export class StatesComponent implements OnInit {
         this.disTConfirmed = AllDisData[district].delta.confirmed;
       }
       else {
-        this.disTConfirmed = "N/A";
+        this.disTConfirmed = 0;
       }
 
       if (AllDisData[district].delta.deceased) {
         this.disTDeceased = AllDisData[district].delta.deceased;
       }
       else {
-        this.disTDeceased = "N/A";
+        this.disTDeceased = 0;
       }
 
       if (AllDisData[district].delta.recovered) {
         this.disTRecovered = AllDisData[district].delta.recovered;
       }
       else {
-        this.disTRecovered = "N/A";
+        this.disTRecovered = 0;
       }
 
     }
     else {
-      this.disTConfirmed = "N/A";
-      this.disTRecovered = "N/A";
-      this.disTDeceased = "N/A";
+      this.disTConfirmed = 0;
+      this.disTRecovered = 0;
+      this.disTDeceased = 0;
     }
   }
   districtDropdown(event) {
@@ -908,11 +908,11 @@ export class StatesComponent implements OnInit {
 
     for (let i = 0; i < 10; i++) {
       dayData = StateData[this.lineChartLabels[i]]
-      this.confirmesData.push(dayData.delta.confirmed)
-      this.recoveredData.push(dayData.delta.recovered)
-      this.deathData.push(dayData.delta.deceased)
-      this.vaccine1data.push(dayData.delta.vaccinated1)
-      this.vaccine2data.push(dayData.delta.vaccinated2)
+      dayData?.delta.confirmed ? this.confirmesData.push(dayData?.delta.confirmed) : this.confirmesData.push(0)
+      dayData?.delta.recovered ? this.recoveredData.push(dayData?.delta.recovered) : this.recoveredData.push(0)
+      dayData?.delta.deceased ? this.deathData.push(dayData?.delta.deceased) : this.deathData.push(0)
+      dayData?.delta.vaccinated1 ? this.vaccine1data.push(dayData?.delta.vaccinated1) :  this.vaccine1data.push(0)
+      dayData?.delta.vaccinated2 ? this.vaccine2data.push(dayData?.delta.vaccinated2) : this.vaccine2data.push(0)
     }
 
     this.clineChartData = [
@@ -942,6 +942,8 @@ export class StatesComponent implements OnInit {
     ]
     this.alineChartLabels = dates.slice(-100)
   }
+ 
+  
 }
 
 

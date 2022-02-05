@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardService {
 
-  IN_API_ENDPOINT:any="https://data.covid19india.org"
+  IN_API_ENDPOINT:any="https://data.incovid19.org"
   WD_API_ENDPOINT:any="https://disease.sh/v2"
 
   constructor(private http: HttpClient) { }

@@ -2,7 +2,7 @@
 
 ## Project details
 
-This project is now live at [covitrack.vincecyriac.live](https://covitrack.vincecyriac.live)
+This project is now live at [covitrack.vincecyriac.dev](https://covitrack.vincecyriac.dev)
 
 ApiURL : India : `api.covid19india.org` & World : `disease.sh/v2`
 
